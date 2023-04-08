@@ -76,24 +76,27 @@ Kickstarter Success - Front End Developer - Sep 2019
 
 ### Hobby Work
 
-#### Automatic Watering System 2020
+Automatic Watering System 2020
 
-Designing and implementing a system of sensors for a MSP432 Launch Pad TI
+- Designing and implementing a system of sensors for a MSP432 Launch Pad TI  
+- Embedded C, GNU Kit
 
-#### LED Cube 2020
+LED Cube 2020  
 
-Created a 3D cube and programmed visual design
+- Created a 3D cube and programmed visual design   
+- C++  
 
-#### Parsnips 2019
+Parsnips 2019   
 
-An implementation of a mock AST feature of VSCode’s function definition and references
-JavaScript, NodeJS
+- An implementation of a mock AST feature of VSCode’s function definition and references   
+- JavaScript, NodeJS
 
-#### 3D Rendering Conway Game of Life 2019
+3D Rendering Conway Game of Life 2019   
 
-3D visual representation of conway game of life utilization graph and graph manipulation
+- 3D visual representation of conway game of life utilization graph and graph manipulation  
+- React, JavaScript
 
-#### Ubuntu Desktop Clone Dec 2019
+Ubuntu Desktop Clone Dec 2019  
 
-Personal Portfolio Website that mocks ubuntu UI
-React JavaScript
+- Personal Portfolio Website that mocks ubuntu UI    
+- React, JavaScript
