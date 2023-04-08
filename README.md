@@ -1,7 +1,7 @@
 [//]: # "Title"
 <div align="center">
 
-# ChatGQT
+# [ChatGQT](https://ethaeral.github.io/ChatGQT/)
 [//]: # "Description"
 A cute lil blog about diving deep into data science. Documenting learnings and projects.
 

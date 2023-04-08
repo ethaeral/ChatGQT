@@ -37,7 +37,7 @@ Teaching Assistant, Data Structures and Algorithms - BloomTech Institute - May 2
 ### Education and Certifications
 
 Massachusetts Institute of Technology, Applied Data Science  
-BloomTech Institute of Technology, Full Stack Web Development
+BloomTech Institute of Technology, Full Stack Web Development  
 Massachusetts Bay Community College, AAS in General Studies
 
 ### Project Work
@@ -52,11 +52,6 @@ Boston House Predictor - Dec 2019 - Jan 2020
 
 - Multivariable linear regression model that forecast house values based on quantitative and qualitative values
 - Python, Flask, Jupyter Notebook, Sklearn, Pandas, Matplotlib, Seaborn, Statsmodels
-
-Parsnips - May 2019
-
-- An implementation of a mock AST feature of VSCode’s function definition and references
-- JavaScript, NodeJS
 
 ### Contribution Work
 
@@ -78,3 +73,27 @@ Kickstarter Success - Front End Developer - Sep 2019
 - Program that uses the tf-idf and random forest models to predict the success of a Kickstarter campaign
 - Built user dashboard to interact with the predictive feature through an API
 - JavaScript, React
+
+### Hobby Work
+
+#### Automatic Watering System 2020
+
+Designing and implementing a system of sensors for a MSP432 Launch Pad TI
+
+#### LED Cube 2020
+
+Created a 3D cube and programmed visual design
+
+#### Parsnips 2019
+
+An implementation of a mock AST feature of VSCode’s function definition and references
+JavaScript, NodeJS
+
+#### 3D Rendering Conway Game of Life 2019
+
+3D visual representation of conway game of life utilization graph and graph manipulation
+
+#### Ubuntu Desktop Clone Dec 2019
+
+Personal Portfolio Website that mocks ubuntu UI
+React JavaScript
