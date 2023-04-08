@@ -20,7 +20,7 @@ timezone: America/New_York
 
 title: ChatGQT # the main title
 
-tagline: A cute little blog about diving deep into Data Science # it will display as the sub-title
+tagline: Cute little blog about Data Science # it will display as the sub-title
 
 description: >- # used by seo meta and the atom feed
   Machine Learning, Deep Learning, Neural Networks, AI, and more - I'll be dabbling
