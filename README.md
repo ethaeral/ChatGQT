@@ -20,3 +20,7 @@ categories: [TOP_CATEGORIE, SUB_CATEGORIE]
 tags: [TAG]     # TAG names should always be lowercase
 ---
 ```
+Run local server   
+```
+bundle exec jekyll s
+```
