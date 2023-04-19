@@ -1,7 +1,7 @@
 ---
 title: Statistic Review Path
 date: 2023-04-13 00:00:00 -0500
-categories: [blog]
+categories: [Blog]
 tags: [forme]
 ---
 
