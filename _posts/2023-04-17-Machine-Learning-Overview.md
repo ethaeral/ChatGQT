@@ -43,7 +43,54 @@ Math:
         - Uniform
         - Beta
 ## Supervised Learning
+
 ### Naive Bayes
+Based on Bayes' Theorem, it is known as a probabilistic classifier.
+
+Bayes theorem describes the probability of an event, based on prior knowledge of conditions that might be related to the event. It is also known to give us the allowance to "invert" conditional probabilities.
+
+It can be expressed mathematically as the following equation:
+$$P(A|B)=\frac{P(B|A)P(A)}{P(B)}$$
+where A and B are events and P(B) != 0
+
+Given this example of having trying to predict whether an email is a spam or not here we can use the Naive Bayes Classifier, in this case is heuristic instead of optimal  
+Probability chain rul e
+
+P(spam|list of words) > bayes theorem
+P(spam|list of words) = (P(spam) * P(list of words|spam)) / ((P(spam) * P(list of words|spam)) + (P(not spam) * P(list of words|not spam))) 
+
+Bottom part of the fraction is called a Evidence
+The model we are using is called the Bernoulli Model
+The whole fraction is called the posterior
+
+Classifies if spam if these conditions are met and are true
+(spam | list of words) = (spam) * (list of words | spam)
+
+To figure out the probability if a word is in a spam message then we have to also account for all the other words in the model - that list would be called a vocabulary
+
+We need to utilize the *probability chain rule. In this incase when using this we are assuming each word is independent to each other which helps with calculations it in turn increases the bias - which hinder the models ability to understand nuances in the data
+
+This reduces down to multiplying of each word showing up in a spam message
+
+If theres a probability where one word has the probability of 0 of showing up in spam in an email we can implement *Laplace smoothing which is basically adding 0.5 to word probability to every word
+
+To pre process or featurize the data we would need to perform these steps before feeding it into the the model:
+
+Tokenization: Removing white space, punctuation, then creating the a list of just tokens
+Stop word removal: Remove word non important words
+Non-alphabetic removal: Remove symbols that aren't words 
+Stemming: Removes -ing, -es -> Studies -> Studi
+Lemmatization: Removes -ing but with nuances -> Studies -> Study
+    - Requires more computations
+
+Some people use Lowercasing, but this can remove the marking or name nouns places
+
+After feautrizing we can then vectorize the list, where we convert the value in to binary
+
+Priors - P(Spam)
+Likelihoods - P(list of words|spam)
+
+
 
 ### Performance
 ### Naive Bayes Optimizations
