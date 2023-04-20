@@ -43,6 +43,15 @@ Math:
         - Uniform
         - Beta
 ## Supervised Learning
+Steps:
+1. Defining a problem
+2. Creating a hypothesis
+3. Create simple Heuristic
+4. Measure Impact
+5. More complex technique
+6. Measure impact
+7. Tune model
+8. Decide which has better performance
 
 ### Naive Bayes
 Based on Bayes' Theorem, it is known as a probabilistic classifier.
@@ -93,6 +102,45 @@ Likelihoods - P(list of words|spam)
 
 
 ### Performance
+Accuracy is how many correct prediction vs false prediction
+    - Only takes into account true positive and true negatives
+    - Doesn't penalize false negatives or false negatives
+Confusion Matrix is used can be used to differeniate between accuracy of two models
+
+Sensitivity: True Positive / (True Positive + False Negative)
+    - The models ability to classify correctly
+    - Fewer false positives
+Specificity:  True Negatives / True negatives + False Positives
+    - The models ability to correctly classify legitimate cases
+    - Fewer false negatives
+Precision: True Positive / True Positive + False Positive
+    - Percentage of true positives
+F1 Score: 2*(sensitivity*precision) / (sensitivity+ precision)
+    - Harmonic mean between sensitivity and precision
+
+There is a trade off between specificity and sensitivity which can be balanced by adjusting the decision point or decision threshold
+
+Labeled data is split into training set, validation set, and test set
+
+Validation set gives an opportunity to tune the model
+
+When we are tuning the decision point we can plot it a Receiver Operator Characteristic Curve
+
+To find the optimal tuned decision point we need to find the equal distance between the two extreme
+
+When comparing different models, just take the area under the curve, which ever value is higher, that model is the better predictor
+
+Hyperparameter Tuning
+Parameters are static variables that go with the model, like in laplace smoothing
+
+Validation
+    - Holdout Validation
+    - Cross-Validation
+        - K-Fold
+            - Will find the most different ways to split the data into training set, validation set, and test set - train the model and compare the performance
+        - Leave-one-out(k=n)
+            - Best for small data, it is k fold but k-1 
+
 ### Naive Bayes Optimizations
 ### K-Nearest Neighbors
 ### Decision Trees
@@ -184,3 +232,29 @@ A word typically discarded, which doesn't add much predictive value
 Removing the ending modifiers of words, leaving the stem of the word
 ### Lemmatization 
 A more calculated form of stemming which ensures proper lemma results from removing the word modifiers.
+### Decision Point
+Also known as a decision rule or threshold, is a cut off point in which anything below the cutoff is determined to be a certain class and anything above the cut off is the other class
+### Accuracy
+The number of true positives plus the number of the true negatives divided by the total number of examples
+### Unbalanced Classes
+When one class is far more frequently observed than another class
+### Model Training
+Determining the model parameter values
+### Confusion Matrix
+In the binary case a 2x2 matrix indicating hte number of true positive, true negatives, fake positives, and false negatives
+### Sensitivity 
+Also recall, is teh proportion of true positive which are correctly classified
+### Specificity 
+The proportion of true negatives which are correctly classified
+### Precision
+The number of true positives divided by the true positives plus false positives
+### F1 Precision 
+The harmonic mean of the precision and recall
+### Validation
+The technique of holding out some portion of examples to be tested separately from the set of examples used to train the model
+### Generalize
+The ability of a model to perform well on the test set as well as examples beyond the test set
+### Receiver Operator Characteristic Curve
+Also ROC curve, is a plot of how the specificity and sensitivity change as the decision threshold changes. The area under the ROC curve, or AUC, is the probability 
+### Hyperparameter
+Any parameter associated with a mode which is not learned
