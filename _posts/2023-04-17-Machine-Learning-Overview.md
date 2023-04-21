@@ -54,7 +54,7 @@ Steps:
 8. Decide which has better performance
 
 ### Naive Bayes
-Based on Bayes' Theorem, it is known as a probabilistic classifier.
+Based on Bayes' Theorem, it is known as a probabilistic classifier. Not great for predictions
 
 Bayes theorem describes the probability of an event, based on prior knowledge of conditions that might be related to the event. It is also known to give us the allowance to "invert" conditional probabilities.
 
@@ -63,7 +63,7 @@ $$P(A|B)=\frac{P(B|A)P(A)}{P(B)}$$
 where A and B are events and P(B) != 0
 
 Given this example of having trying to predict whether an email is a spam or not here we can use the Naive Bayes Classifier, in this case is heuristic instead of optimal  
-Probability chain rul e
+Probability chain rule
 
 P(spam|list of words) > bayes theorem
 P(spam|list of words) = (P(spam) * P(list of words|spam)) / ((P(spam) * P(list of words|spam)) + (P(not spam) * P(list of words|not spam))) 
@@ -142,7 +142,64 @@ Validation
             - Best for small data, it is k fold but k-1 
 
 ### Naive Bayes Optimizations
+When there are multiple variants to detect we can add another term into the formula
+
+P(_|_) = ()/(P(K) * P([]K|K)) + (P(L) * P([]L|L)) + P(M) * P([]M|M)
+
+Multiple priors and likelihood
+*Likelihood will change
+
+Naive Bayes Classifier has a few variants of its formula.
+    - Gaussian
+        - Supports continuous values 
+        - Assumption that each class in normally distributed
+            - Pros
+                - Simple and fast
+                - Solves multi-class problem -> good for identifying sentiment
+                - Does well with few samples for training
+                - Performs well in text analysis problems 
+            - Cons
+                - Relies on the assumption of independent features
+                - Not ideal for large number of numerical attributes -> will cause high computation and will suffer the curse of dimensionality
+                - If a category is not captured in the set, the model will assign 0 probability and you will be forced to use smoothing techniques
+    - Multi-nomial
+        - Event based model
+        - Uses feature vectors represents frequencies
+        - Detects the counts of events 
+    - Bernoulli 
+        - Event based model
+        - Uses features that are independent boolean in binary form
+        - Detects whether event is present or not
+Techniques for NLP
+    - TF-IDF (Term Frequency Inverse Document Frequency) score
+        - Express importance and unimportance of a word
+
+When the data shifts in categories we can retrain the model in specific intervals - we can incrementally train the model
+
+*Feature Hashing
+    - Do not need to retrain the model as much
+    - Reduces targeted adjustments in vocabulary
+
 ### K-Nearest Neighbors
+Goal: Understand the a label of an unknown based on their nearest 
+
+Euclidean Distance
+- Distance formula between each nodes
+
+Picking K might be beneficial to pick an odd number
+
+*Jaccard Distance
+(#mismatches/#comparisons)
+*Hamming Distance
+
+Models based on distance will be sensitive to scaling
+
+Improve model through adding weight and scaling the data
+Computationally Expensive
+    - Reduce computation -> KD Tree, binary tree that splits the N dimensional space into layers -> Suffer dimensionality growth pains
+
+
+
 ### Decision Trees
 ### Linear Regression
 ### Logistic Regression
@@ -258,3 +315,33 @@ The ability of a model to perform well on the test set as well as examples beyon
 Also ROC curve, is a plot of how the specificity and sensitivity change as the decision threshold changes. The area under the ROC curve, or AUC, is the probability 
 ### Hyperparameter
 Any parameter associated with a mode which is not learned
+### Multinomial Distribution
+A distribution which models the probability of counts of particular outcomes
+### TF-IDF
+Short for Term Frequency-Inverse Document Frequency, TF-IDF is a method of transforming features, usually representing counts of words, into values representing the overall importance of different words across some documents
+### Online Learning
+Incremental learning within a model to represent an incrementally changing population
+### N-Gram
+A series of adjacent words of length n
+### Feature Hashing
+Representing feature inputs such as articles or messages, as the results of hashes modded by predetermined value
+### scikit-learn
+A machine learning python library which provides implementations of regression, classification, and clustering
+### Kernel Density Estimation
+Also KDE, a way to estimate the probability distribution of some data.
+### Cluster
+A consolidated group of points
+### Euclidean Distance
+The length of the line between two points
+### Feature Normalization
+Typically referring to feature scaling that places the values of a feature between 0 and 1
+### Feature Standardization
+Typically referring to feature scaling that centers the values of a feature around the mean of the feature and scales by the standard deviation of the feature
+### Jaccard Distance
+One minus the ratio of the number of like binary feature values and the number of like and unlike binary feature values, excluding instances of matching zeros
+### Simple Matching Distance
+One minus the ratio of the number of like binary feature values and the number of like and unlike binary feature values
+### Manhattan Distance
+Sum of the absolute difference of two input features
+### Hamming Distance
+The sum of the non-matching categorical feature values
