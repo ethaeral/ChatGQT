@@ -197,10 +197,42 @@ Models based on distance will be sensitive to scaling
 Improve model through adding weight and scaling the data
 Computationally Expensive
     - Reduce computation -> KD Tree, binary tree that splits the N dimensional space into layers -> Suffer dimensionality growth pains
-
-
-
 ### Decision Trees
+When the decision tree is being trained, given the data set it creates a tree where its split based on a threshold of a feature. 
+
+Gini Impurity: Chance fo being incorrect if you randomly assign a label to an example in the same set 0-1
+
+Information Gain = Starting Uncertainty - Average Uncertainty
+
+Partitioning sets based on average uncertainty based on the feature classifier questions
+
+To stop partitioning we can assign a max depth, assign minimum of numbers of examples in a node or go until the nodes are pure (although can cause over fitting the data)
+
+How we would handle  
+    - Missing data
+        - Surrogate splits
+    - Multi class labels
+        - Same but adds the second label to impurity
+    - Regression
+        - Instead of gini impurity we're gonna used mean squared error ->  basically average MSE of all examples 
+
+CART over fits easily
+    - Limit max depth to 5
+    - Boosting
+        - Taking weak learners which are shallow depth trees and combine them into a stronger learner
+        - Can overfit more, and needs cross validation
+        - Using bagging
+            - Bootstrap: You make multiple sample sets from the main data set and run it through the model (row sampling with replacement) -> Aggregation: then combines to one output
+                - Trains the next model based off the first error
+            - Random forest
+                - Averages the output from the multiple models
+
+C4.5 
+    - Designed for classification
+    - n-ary splits
+    - information gain entropy
+
+
 ### Linear Regression
 ### Logistic Regression
 ### Support Vector Machine
@@ -345,3 +377,13 @@ One minus the ratio of the number of like binary feature values and the number o
 Sum of the absolute difference of two input features
 ### Hamming Distance
 The sum of the non-matching categorical feature values
+### Decision Tree
+A tree-based model which traverses examples down to a leaf nodes by the properties of the examples features.
+### Sample Size
+The number of observation taken from a complete population
+### Classification and Regression Tree
+Also CART, is an algorithm for constructing an approximate optimal decision tree for given examples
+### Missing Data 
+When some features within an example are missing
+### Split Point 
+A pair of feature and feature value
