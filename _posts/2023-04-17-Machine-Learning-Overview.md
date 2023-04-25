@@ -2,7 +2,7 @@
 title: Machine Learning Overview
 date: 2023-04-17 00:00:00 -0500
 categories: [Core]
-tags: [foryou, interview prep]
+tags: [forme, interview prep, notes]
 ---
 ----
 ##### 📑 **Requirements**:
@@ -234,6 +234,15 @@ C4.5
 
 
 ### Linear Regression
+A line best describing a plotted value is called a fitted line
+y=mx+b
+y - dependent variable
+x - independent variable
+m - slope
+b - y intercept
+
+Use confidence interval for prediction
+Correlation 
 ### Logistic Regression
 ### Support Vector Machine
 ## Unsupervised Learning
