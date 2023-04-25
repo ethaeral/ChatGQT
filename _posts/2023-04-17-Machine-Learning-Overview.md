@@ -527,3 +527,37 @@ When a pattern emerges in segments of examples but is no longer present when the
 Python module which provides various statistical tools
 ### Coefficient 
 Another name for a parameter int he regression model
+### Sigmoid FUnction 
+also the logistic function, a function which outputs a range from 0 to 1
+### Closed Form Solution
+For our case, this is what ordinary least squares provides for linear regression. Its a formula which solves an equation
+### Cross-Entropy Loss
+A loss function which is used in classification task. It's technically the entropy of true labels plus the KL Divergence of the predicted and true labels. Minimizing the the entropy minimizes the difference between the true and predicted label distributions
+### Parameters 
+Also weights or coefficients. Values to be learned during the model training.
+### Learning Rate
+A multiple typically less than 1, used during the parameter update step during model training to smooth the learning process
+### Odds Ratio
+The degree of associate between two events. If the odds ratio is 1, then the two events are independent. If the odds ratio is greater than 1, the events are positively correlated, otherwise the events are negatively correlated
+### Multinomial Logistic Regression 
+Logistic Regression in which there are more than two classes to be predicted across
+### Softmax
+A sigmoid which is generalized to more than two classes to be predicted against
+### Gradient Descent
+An iterative algorithm with the goal of optimizing some parameters of given function with respect to some loss function. If done in batches, all of the examples are considered for an iteration of gradient descent. In mini-bath gradient descent, a subset of examples are considered for a single iteration. Stochastic gradient descent considers a single example per gradient descent iteration.
+### Downsampling
+Removing a number of majority class examples. Typically done in addition to upweighting
+### Upweighting
+Increasing the impact a minority class example has on the loss function. Typically done in addition to downsampling.
+### Epoch 
+One complete cycle of training on all the examples 
+### Regularization
+A technique of limiting the ability for a model to overfit by encouraging the values parameter to take on smaller vallues
+### Early Stopping
+Halting the gradient descent process prior to approaching the minima or maxima
+### Mcfadden's Pseudo R-Squared
+An analog to linear regression's R-squared which typically takes on smaller values than the traditional R-Squared
+### Generative Model
+A model which aims to approximate the joint probability of the features and labels
+### Discriminative Model
+A model which aims to approximate the conditional probability of the features and labels
