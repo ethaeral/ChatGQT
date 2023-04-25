@@ -267,6 +267,84 @@ Care for Simpson paradox
 
 
 ### Logistic Regression
+Logistic regression is similar to linear regression, but instead of y being a predicted value it is a probability of an event occurring.
+
+Sigmoid function or logistic regression 
+p(y|x) = (1/(1+e^-(Bix+B0)))
+
+1. Assign a loss
+Loss(yhat, y) = ((y)log(yhat) + (1-y)log(1-yhat))difference in yhat and y
+yhat is predictive value 
+y is actual values
+cross-entropy: Loss(yhat, y) = -[((y)log(yhat) + (1-y)log(1-yhat))]
+2. Performance and optimization
+Sum of cross-entropy loss / # elements
+Average loss among coefficient relate to variables, and how can we use the loss as an indicator for optimization
+When plotting Loss v the Logistic Regression, you can find points of optimization alone the line by calculating the slope of change. The goal is to get closer to minima, and when this happens the loss function has converged and loss has been minimized
+You can find the derivative of the loss function by using
+dloss/dB1 = sum of [yhati - yi]x1i 
+This will find the minima of the curve
+Gradient Descent:
+When you combine the derivative of each coefficient and its loss in a vector it becomes a gradient which will tell us how to adjust each weight of each parameters of the weights
+We adjust like this:
+B0 = B0coeff - dB0eff and so on
+
+Bi^th = Bi^t - r deltaBi
+
+r being a learning rate, reduces the chance to overshoot the minima - choose an optimal learning rate so its gets quickly to the minima but doesn't miss it
+
+Outcome of the predictive model, we can determine if something will happen given a threshold 
+
+Follow up with cross validation to find the optimal threshold
+
+TO find the decision boundary 
+1 dim: -(b0/b1)
+2 dim: -(b1x1-b0)
+
+represent that in a model in the gradient**
+vectorb = [d(loss)/d(b0)]
+
+3. Interpretation of impact on coefficient on output
+Odds ratio: e^B1
+Percent changed odds: 1-e^b1
+
+4. Multiple classes
+When you want to predict between multiple classes, you have to use a multinomial regression with softmax, make sures that the probability among the class prediction equals out to 100, the highest probability will be the predictive class
+
+Multiple class model:
+p(y=2|xi)= (1+e^-(b12*xi1+...+B02)/ sum of 1+e^-(B1k * xi + ... + B0k))
+
+Loss function:
+Loss(yhat,y)= sum of -[sum of (yi)log(yhati^k)] /  # of elements
+
+Gradient:
+dloss/dB1^k = -sum[yi - yhati^k]x1i
+
+5. Optimization
+Batch Gradient Descent: Loss and average of all the training examples and finding the gradient and updating the parameters
+Stochastic Gradient Descent: Pick random training example, find its updated loss and then update - very slow to converge
+Mini Batch: Take a small batch of the data and perform gradient descent, so there is less noise and its faster
+
+Over fitting happens when a weight for a parameter becomes way too large. In this case we can use Regularization, which is basically adding an extra term
+
+Regularization Terms
+L2, Ridge, Gaussian 
+L1, Lasso, Laplace 
+
+Best tuned through cross validation
+
+Early stopping parameters to prevent over fitting
+
+Mix Max Scaling
+XiScaled = (Xi-Ximin)/Ximax-Ximin
+
+6. Performance
+McFadden's pseudo-R^2
+.2-.4 good fit
+
+naive bayes - generative
+logistic regression - discriminative 
+
 ### Support Vector Machine
 ## Unsupervised Learning
 ### K-Means
