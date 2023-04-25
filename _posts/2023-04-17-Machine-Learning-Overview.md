@@ -234,15 +234,38 @@ C4.5
 
 
 ### Linear Regression
-A line best describing a plotted value is called a fitted line
-y=mx+b
-y - dependent variable
-x - independent variable
-m - slope
+Goal of Linear Regression is to create best fit line given the plotted values. With this line a user has a ability to plug in a value and receive a predicted value. To find the linear regression
+
+y=ax+b
+y - dependent variable / labels
+x - independent variable / features
+a - slope
 b - y intercept
 
-Use confidence interval for prediction
-Correlation 
+1. Finding A:
+a = sum of (xi - avg x)*(yi -  avg y) / sum of (xi- avg x)^2
+2. Checking P value of coefficient, if the p value is less than 0.05 then its seen as significant -> coef / standard error of a coefficient = t-statistic and then find that value in a t distribution
+3. Check confidence interval of the coefficient:
+coef - CI * SECoef - coef+CI * SECoef 
+4. Interpretation - Correlation of feature and label, positive R is a positive correlation, negative R is a negative correlation, 0 correlation is no correlation
+5. Check performance with R squared value, the explained difference of the variance, the higher Rsq then less unexplained variance
+Rsq = 1-(var(errors)/var(y))
+Adj R2= 1-(n-1/n-2)*(1-R^2)
+6. When working with multivariate functions, collinearity needs to be considered - this is when there is a possibility where independent variables are have correlation - how we interpret the coefficient will have to change
+7. To find collinear variables, we can look at VIF (Variance Inflation Factor) 
+    1 - no collinearity
+    1-5 - moderate
+    >=5 - severe - need to use a mitigation strategy
+Mitigation strategy example: centering
+8. Feature interaction
+If a independent variable has interaction than another we can describe that in the function by multiplying together as an interaction term - after the introduction of the interaction term, if the Rsq goes up and the p value turns significant
+We can make an interaction term with an independent variable with itself
+
+If you put too many terms you can over fit your data
+
+Care for Simpson paradox
+
+
 ### Logistic Regression
 ### Support Vector Machine
 ## Unsupervised Learning
@@ -396,3 +419,33 @@ Also CART, is an algorithm for constructing an approximate optimal decision tree
 When some features within an example are missing
 ### Split Point 
 A pair of feature and feature value
+### Line of Best Fit
+The line through data points which best describe the relationship of a dependent variable with one or more independent variables. Ordinary least squares can be used to find the line of best fit
+### P Value
+The probability of finding a particular result or a greater result given a null hypothesis being true
+### Confidence Interval
+The possible range of unknown value. Often comes with some degree of probability 
+### Correlation
+The relationship between a dependent and independent variable
+### R Squared
+Also the coefficient of determination the percentage of variance in the dependent variable explained by the independent variables
+### Residuals 
+The distance between points and a particular line
+### Independent Variable
+A variable whose variation is independent from other variables
+### One-hot Encoding
+An encoding for categorical variable where every value that a variable can take on is represented as a binary vector
+### Dependent Variable
+A variable whose variation depends on other variables
+### Variance Inflation Factor
+A measure of multicollinearity in a regression model
+### Collinearity
+When one or more multicollinearity independent variables are not actually independent
+### Nonlineaer Regression
+A type of regression which models nonlinear relationships in the independent variables
+### Simpson's paradox
+When a pattern emerges in segments of examples but is no longer present when the segments are grouped together
+### Statsmodels
+Python module which provides various statistical tools
+### Coefficient 
+Another name for a parameter int he regression model
