@@ -346,6 +346,7 @@ naive bayes - generative
 logistic regression - discriminative 
 
 ### Support Vector Machine
+Removes the need for a decision threshold and adds a decision boundary
 ## Unsupervised Learning
 ### K-Means
 ### Singular Value Decomposition
