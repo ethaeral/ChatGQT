@@ -552,7 +552,7 @@ Increasing the impact a minority class example has on the loss function. Typical
 ### Epoch 
 One complete cycle of training on all the examples 
 ### Regularization
-A technique of limiting the ability for a model to overfit by encouraging the values parameter to take on smaller vallues
+A technique of limiting the ability for a model to overfit by encouraging the values parameter to take on smaller values
 ### Early Stopping
 Halting the gradient descent process prior to approaching the minima or maxima
 ### Mcfadden's Pseudo R-Squared
