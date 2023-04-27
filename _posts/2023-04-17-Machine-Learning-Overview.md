@@ -415,6 +415,7 @@ If you have a ton a points but not that many features you might want to start wi
 
 ## Unsupervised Learning
 ### K-Means
+
 ### Singular Value Decomposition
 ## Deep Learning
 ### Neural Networks
@@ -648,3 +649,19 @@ A function which has kinks in which a derivative is not defined
 Function with one optima
 ### Kernel Trick
 The process of finding the dot product of a high dimensional representation of feature without computing the high dimensional representation itself. A common kernel is the radial basis function kernel
+### Centroid
+The location of center of a cluster in n-dimensions
+### Inertia
+The sum of distances between each point and the centroid
+### Local Optima
+A maxima or minima which is not the global optima
+### Non-convex function
+A function which has two or more instances of zero-slope
+### Elbow Method
+A method of finding the best value for k in k-means. It involves finding the elbow of the plot of range of ks and their respective inertias
+### Silhouette Methods
+A method of finding the best value for k in k-means. It takes into account the ratios of the inter and intra clusters distances
+### K-means++ 
+Using a weighted probability distribution as a way to find the initial centroid locations for the k-means algorithm
+### Agglomerative Clustering
+A clustering algorithm that builds a hierarchy of sub clusters that gradually group into a single cluster. Some techniques for measuring distances between clusters are single-linkage and complete-linkage methods
