@@ -415,6 +415,46 @@ If you have a ton a points but not that many features you might want to start wi
 
 ## Unsupervised Learning
 ### K-Means
+Organize data in K # of groups
+Pick centroid and find all distance and then the data point will assume the centroid label when its the closest
+Then update centroid to be the average of the cluster
+Then repeat
+When the centroid doesn't change then it has converged
+We take the euclidean distance 
+We can sum the distance and get the inertia
+We want to minimize the inertia to form the best cluster
+We need to find all possible clusters and measure the inertia and compare
+Time complexity n^(kd+1)
+with lloyd's algorithm we can get nkd
+We're approximating the best cluster
+
+When there is local minima we can get stuck there
+
+Bisected K-means
+whatever cluster has more inertia then we perform kmeans on that cluster
+
+1. Optimize
+Use elbow method, we plot all clusters and map the inertia
+Silhouette Method
+a(i)=avg(d(i,j)) 
+s(i)=(b(i)-a(i)/max(a(i),b(i)))
+if we plot avg the si per cluster, we get a peak and that is the silhouette coefficient
+
+Centroid Classifier
+K-medians
+    - manhattan distance
+K-medoids
+    - k cluster average, than use the real data point closest
+K-modes
+    - gauges differences similarities 
+
+Single linkage cluster
+takes closest point in each cluster
+and then compare them to the other parts of clusters
+complete linkage cluster takes the farthest points and compare them
+
+K means is distance based and perform scaling and standardize
+xhat = x-xavg / sigma
 
 ### Singular Value Decomposition
 ## Deep Learning
