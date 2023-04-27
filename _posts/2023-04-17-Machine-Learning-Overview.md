@@ -455,6 +455,9 @@ complete linkage cluster takes the farthest points and compare them
 
 K means is distance based and perform scaling and standardize
 xhat = x-xavg / sigma
+ KD tree help performance
+ Vulnerable to high dimensional data
+ 
 
 ### Singular Value Decomposition
 ## Deep Learning
