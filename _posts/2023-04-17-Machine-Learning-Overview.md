@@ -346,6 +346,73 @@ naive bayes - generative
 logistic regression - discriminative 
 
 ### Support Vector Machine
+Cares more about how correctly things are classified than the exact probability of classification
+
+Instead of using a decision threshold, it cares more about a decision boundary
+
+Decision boundary can be defined by this formula: 0=w*x-b
+Positive examples: 1=w*x-b
+Negative examples: -1=w*x-b
+These formulas are dot products
+
+The distance between the negative and positive example line is called a margin and can be defined by 2/[norm](https://www.varsitytutors.com/linear_algebra-help/norms) of w ||w||
+
+Goal is maximize the margin without going past the negative and positive examples, we need to minimize the norm of W
+
+w^tx-b >= 1 when yi=1
+w^tx-b <= 1 when yi=-
+yi(w^tx-b)>=1 -> constraints
+min ||w|| -> optimize
+
+constrained optimization problem
+
+quadratic programming to fit model weights would result in hard margin SVMs
+
+soft margin svms
+min ||w||^2 + c(regularization) sum of ei (error term)
+yi(w^tx-b)>=1-ei
+
+we can max our error term like so:
+ei=max(0,1-yi(w^tx-b))
+
+we can turn this into an optimization formula with no constraints
+min ||w||^2 + regularization of sum of *max (0,1-yi(w^tx-6))
+
+*hinge loss
+
+here we can plot it and also use sub gradient descent with pegasos
+
+Kernel Trick -> Allows us to avoid transforming out feature to larger dimensions and still get dot product
+
+Cant use the kernel trick with svm in a primal form -> dual of svms
+
+representor theorem to represent the weights of svms 
+w=sum of ai* yi *xi
+
+take the dual
+max sum of ai - 1/2 * sum of aj * ak * yj * yk* xj^Txk
+max sum of ai - 1/2 * sum of aj * ak * yj * yk* kernel(could be linear, polynomial, gaussian) function of(xj^Txk)
+
+great for # example N is much larger than the dimensions we want to project
+
+RBF Kernel (Gaussian kernel)
+Krbf = e^(-(||x-xi||^2)/2sigma ^2)
+
+if sigma is too small, overfitting
+if sigma is too large, underfitting
+
+SVMS can be used for regression
+
+Key Takeaway 
+linearly separate separable data
+Hard SVM v Soft SVM
+Soft SVM has slack variables 
+Soft SVM can use soft gradient descent to optimize
+We can add feature interaction term which is preferred when we have low dimension 
+If we dont have large data, and we want to project into a high dimensional space, we can use the kernel trick
+SVM, are distance based with margins, if there is a low number of examples,start with linear svm
+If you have a ton a points but not that many features you might want to start with logistic regression
+
 ## Unsupervised Learning
 ### K-Means
 ### Singular Value Decomposition
@@ -561,3 +628,23 @@ An analog to linear regression's R-squared which typically takes on smaller valu
 A model which aims to approximate the joint probability of the features and labels
 ### Discriminative Model
 A model which aims to approximate the conditional probability of the features and labels
+### Support Vectors
+The most difficult to separate points in regards to decision boundary. They influence the location and orientation of the hyperplane
+### Hyperplane
+A decision boundary in any dimension
+### Norm
+Here, the L2 norm, is the sq root of the sum of squares of each element in a vector
+### Outlier
+A feature of group of features which vary significantly from the other features
+### Slack
+The relaxing of the constraint that all examples must lie outside of the margin. This creates a soft-margin SVM
+### Hinge Loss
+A loss function which is used by a soft-margin SVM
+### Sub-gradient
+THe gradient of a non differentiable function
+### Non-differentiable
+A function which has kinks in which a derivative is not defined
+### Convex Function
+Function with one optima
+### Kernel Trick
+The process of finding the dot product of a high dimensional representation of feature without computing the high dimensional representation itself. A common kernel is the radial basis function kernel
