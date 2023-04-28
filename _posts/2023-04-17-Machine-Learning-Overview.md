@@ -619,7 +619,13 @@ start with one hidden layer
 start with more layers and unit than u need
 see which weights are near zero after training then prune
 
-
+Feature Scaling
+Activation Functions
+Loss Function 
+Optimizers
+Regularization Terms
+Dropout Specifications
+Architecture 
 
 ### Convolutional Neural Networks
 ### Recurrent Neural Networks
@@ -879,3 +885,51 @@ Applicable only to square matrices, the method of factoring a matrix into its ei
 Also PCA, is eigendecomposition performed on the covariance matrix of some particular data. The eigenvectors then describe the principle components and the eigenvalues indicate the variance described by each principals components. Typically, assumption is not true, then you can use kernel PCA
 ### Orthogonal
 Perpendicular is n-dimensions
+### Neuron
+Sometimes called a perceptron, a neuron is a graphical representation of the smallest part of a neural network. For the Machine Learning Crash Course reference neurons as nodes or units
+### Gradient
+A vector of partial derivatives. In terms of neural networks, we often use the analytical gradient in software and use the numerical gradient as a gradient checking mechanism to ensure the analytics gradient is accurate
+### Parameter 
+Any train value in a model,
+### Feature Transformation
+A mathematical function applied to features
+### Hidden Layer
+A layer that's not the input or output layer in a neural network
+### Backpropagation
+The use of the derivative chain rule along with dynamic programming to determine the gradients of the loss function in neural networks
+### Forward Pass
+Calculating an output of a neural network for a particular input
+### Local Optima 
+A maxima or minima which is not the global optima
+### Momentum
+A concept applied to gradient descent in which the gradients applied to the weight updates depends on previous gradients
+### Adagrad
+An optimizer used to update the weights of a neural network in which different learning rates are applied to different weights
+### Adam
+A common gradient descent optimizer that takes advantage of momentum and adaptive learning rates
+### Hyperparameter
+Any parameter associated with a model which is not learned
+### Optimizers
+Techniques which attempt to optimize gradient descent 
+### Vanishing Gradient
+The repeated multiplication of small gradients resulting in an overflow or 0 value products
+### Exploding Gradient
+The repeated multiplication of large gradients resulting in an overflow or infinity value products
+### Initialization Techniques
+Ways to cleverly initialize the weights of neural networks in an attempt avoid vanishing and exploding gradients. Kaiming initialization used with asymmetric activation functions and xavier glorot initialization, used with symmetric activation function are both examples. These techniques usually depend on the fan in and fan out per layer
+### Activation Function
+The function used to the output of a neuron. These activations can be linear or nonlinear. If they're nonlinear, they can be symmetric or asymmetric
+### Rectified Linear Unit
+An asymmetric activation function which outputs the value of the positive inputs and zero otherwise. There are variations such as the Leaky ReLU. They can be susceptible to the dead neuron problem but generally perform well in practice
+### Hyperbolic Tangent
+A symmetric activation function which ranges from -1 to 1
+### L2 Loss
+The sum of the squared errors of all training examples. Not to be confused with L2 regularization
+### Mean Absolute Error
+The average of the absolute differences across the training examples
+### Dropout
+A regularization technique used per layer to reduce over fitting. Dropout involves randomly omitting neurons from the neural network structure at each training iteration. Effectively, dropout produces an ensemble of neural networks. Dropout is incomplete without adjusting for the dropout in preparation of prediction
+### Binary Classification
+A supervised learning task in which there are two possible outputs
+### Pruning Neurons
+Removing neurons from a neural network in an effort to reduce the number of model parameters if by removing the neurons equivalent performance can be obtained
