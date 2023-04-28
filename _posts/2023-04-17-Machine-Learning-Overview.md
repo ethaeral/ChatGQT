@@ -499,7 +499,7 @@ Also nonlinear dimension reduction like Kernel PCA
 
 ## Deep Learning
 ### Neural Networks
-Takes the input and multiple by the weight, then added up to summation then passed through a nonlinear function sigmoid function then result into output. sigma(w transpose x) = predictive output then we can add a bias inside of the (w transpose x + 1*bias)
+Takes the input and multiple by the weight, then added up to summation then passed through a nonlinear function sigmoid function(activation) then result into output. sigma(w transpose x) = predictive output then we can add a bias inside of the (w transpose x + 1*bias)
 
 We use the same loss like we do in logistic regression and then take the gradient 
 
@@ -511,6 +511,7 @@ Each neuron will have to make a decision boundary so it can have a full output
 
 How complex the data is the depth of the network is greater
 
+OPTIMIZATION
 Loss function of cross entropy
 
 To find the deviation of these function you use numerical gradient - takes a long time
@@ -523,6 +524,7 @@ We can use chain rule and dynamic programming to do back propagation
 Training we need a forward pass
 and when we have the loss we can do back propagation to update the weights
 Using the same algorithm
+
 To optimize we can use stochastic gradient descent, but slow
 We can use momentum into gradient descent 
 w^t+1 = w^t - rDelta^tLoss - rDelta^t-1Loss, the momentum term keys to the algorithm how much the past should affect the current adjustment
@@ -531,7 +533,92 @@ v^t = yv^t-1 - rDeltaLoss
 Problem with momentum, is that you can skip over global optima
 
 Adagrad can be used instead momentum
-21.19
+which utilizes a learning rate for a parameter
+w1^t+1=w1^t - r1^t * (dloss^t/dw1)
+r1^t = rgeneral/sqrt((dloss^t-1/dw1)^2 + ... + (dloss^t-n/dw1)^2) + e
+
+Adam
+combines momentum with an adoptive learning rate
+w1^t+1=w1^t - (rgeneral/sqrt(vhat)+e) * mhatt
+mt = b1 * mt-1 + (1-b) deltaLoss^t
+vt = b1 * vt-1 + (1-b) (deltaLoss^t)^2
+b= beta hyper parameters 
+One instance
+mthat = mt/1-beta1^t
+vthat = vt/1-beta2^t
+
+Other optimizers 
+adaelta
+rmsprop
+
+Two major problems occur in optimization 
+1. exploding gradients where values become to big
+2. vanish gradients where values become too small
+
+INITIALIZATION
+To solve this we can use
+initialization where we start each edge with a weight
+bad way, is to initialize with uniformed or normal distribution
+Xavier / Glorot(glowrow) initialization
+better way is to initialize with normal where mean is o and sigma is sqrt2/fi+f0
+fi = number of inputs or nodes in the layer
+f0 = number of output nodes in the next layer
+
+activation functions
+symmetrical and rectified linear unit - all neg value will b 0 and all positive value will be positive
+pro
+- more computationally efficient
+- tends to produce better model performance
+- sparsity (reduces over fitting)
+    - 0 value for all negative inputs
+
+con
+- uncapped activation, exploding gradient
+- dying ReLU problem
+    - once the neuron is zero its zero FOREVER
+
+Kaiming for asymmetric activation functions like leaky reLU
+initialize with normal where mean is o and sigma is sqrt2/fi
+
+Feature scaling
+
+Activation Function
+Sigmoid
+ReLU variants - start with frist
+Hyperbolic tangent tanh
+Can use different activation function in each layer
+
+To output multiple class probability - softmax
+for regression - use linear activation function
+
+Performance Checking
+Loss Functions
+Mean Sq Error L2
+L(y,yhat) = sum (yi-yihat)^2 / n
+Mean absolute error L1
+L(y,yhat) = sum |yi-yihat| / n
+cross-entropy log loss
+L(y,yhat) = (ylog(yhati))+(1-y)log(1-yhat)
+
+Regularization 
+L1/L2 added to loss
+L1
+L(y,yhat) = -sum yi log (yhati) + lambda sum|wi|
+L2
+L(y,yhat) = -sum yi log (yhati) + lambda sum wi^2
+Dropout
+When neural networks node has constantly updating probability of success, if nodes don't meet that probability requirement they are dropped
+Cons 
+When forming predications outside, nodes wont be dropped out and can mess things up
+So we use inverted drop out, we divide each layer by probability, so it will match on prediction and test time
+
+Architecture
+start with one hidden layer 
+#neurons = input+output / 2
+
+start with more layers and unit than u need
+see which weights are near zero after training then prune
+
 
 
 ### Convolutional Neural Networks
