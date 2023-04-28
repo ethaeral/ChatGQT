@@ -498,6 +498,41 @@ Also nonlinear dimension reduction like Kernel PCA
 
 ## Deep Learning
 ### Neural Networks
+Takes the input and multiple by the weight, then added up to summation then passed through a nonlinear function sigmoid function then result into output. sigma(w transpose x) = predictive output then we can add a bias inside of the (w transpose x + 1*bias)
+
+We use the same loss like we do in logistic regression and then take the gradient 
+
+Then we can update the weights
+
+The output will be feed into another logistic regression
+
+Each neuron will have to make a decision boundary so it can have a full output 
+
+How complex the data is the depth of the network is greater
+
+Loss function of cross entropy
+
+To find the deviation of these function you use numerical gradient - takes a long time
+Analytic Gradient -> take d of loss 
+The chain rule, to know the partial d, we can do:
+dL/dw6 = dL/dYOut * dYOut/dYIn * dYIn/dw6
+
+We can use chain rule and dynamic programming to do back propagation 
+
+Training we need a forward pass
+and when we have the loss we can do back propagation to update the weights
+Using the same algorithm
+To optimize we can use stochastic gradient descent, but slow
+We can use momentum into gradient descent 
+w^t+1 = w^t - rDelta^tLoss - rDelta^t-1Loss, the momentum term keys to the algorithm how much the past should affect the current adjustment
+w^t+1 = w^t - v^t
+v^t = yv^t-1 - rDeltaLoss
+Problem with momentum, is that you can skip over global optima
+
+Adagrad can be used instead momentum
+21.19
+
+
 ### Convolutional Neural Networks
 ### Recurrent Neural Networks
 ### Generative Adversarial Neural Networks
