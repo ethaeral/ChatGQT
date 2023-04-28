@@ -460,6 +460,42 @@ xhat = x-xavg / sigma
  
 
 ### Singular Value Decomposition
+
+input array can solve for three different matrices 
+
+A=UEV^T
+U - Rotation
+Sigma - Scaling
+V - Final rotation
+
+A1 -> rotates axis, maps the points on the axis and rotates it back
+Another rotation is performed perpendicular to the first axis
+
+Go through Rank 1 to Rank N to find the best coverage
+We can only use m-n rows for this system
+in the second matrix there is you take the first element of the and then divide the sum of the whole matrix and that will give you the variance percentage
+
+plot the coverage of information for each rank and you want to find the ranks that will cover 95% of the 
+
+These vectors comes from Eigendecomposition
+
+A=UEV^T <- each point is an eigen value
+A = (ui=(Avi/sigma)(eigenvalues AA^T)(eigenvectors (A^T)A))
+
+Eigendecomposition can only really work on square matrices 
+The ranks of the Eigen values are not perpendicular so we cant break them down
+
+PCA - Principal component analysis
+A is standardized
+
+(A^T)A/N-1 = VLV^T
+(A^T)A -> usually unstable
+
+A standardized =(UE) principal components V^T
+
+We can use PCA or SVD for dimensionality reduction
+Also nonlinear dimension reduction like Kernel PCA
+
 ## Deep Learning
 ### Neural Networks
 ### Convolutional Neural Networks
@@ -708,3 +744,15 @@ A method of finding the best value for k in k-means. It takes into account the r
 Using a weighted probability distribution as a way to find the initial centroid locations for the k-means algorithm
 ### Agglomerative Clustering
 A clustering algorithm that builds a hierarchy of sub clusters that gradually group into a single cluster. Some techniques for measuring distances between clusters are single-linkage and complete-linkage methods
+### Singular Value Decomposition
+Also SVD, a process which decomposes a matrix into a rotation and scaling terms. Its is a generalization of eigendecomposition
+### Rank r Approximation
+Using up to and including, the rth terms in the singular value decomposition to approximate an orginal matrix
+### Dimensionality Reduction
+The process of reducing the dimensionality of features. This is typically useful to speed up the training of models and in some cases, allow for a wider number of machine learning algorithms to be used on the examples. This can be done with SVD or PCA and as well certain types of neural networks such as autoencoders
+### Eigendecomposition
+Applicable only to square matrices, the method of factoring a matrix into its eigenvalues and eigenvectors. AN eigenvector is a vector which applies a linear transformation to some matrix being factored. THe eigenvalues scale the eigenvector values
+### Principal Component Analysis
+Also PCA, is eigendecomposition performed on the covariance matrix of some particular data. The eigenvectors then describe the principle components and the eigenvalues indicate the variance described by each principals components. Typically, assumption is not true, then you can use kernel PCA
+### Orthogonal
+Perpendicular is n-dimensions
