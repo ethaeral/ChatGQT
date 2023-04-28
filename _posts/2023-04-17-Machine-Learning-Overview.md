@@ -460,6 +460,7 @@ xhat = x-xavg / sigma
  
 
 ### Singular Value Decomposition
+
 ## Deep Learning
 ### Neural Networks
 ### Convolutional Neural Networks
