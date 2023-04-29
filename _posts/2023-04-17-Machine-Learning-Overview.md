@@ -628,6 +628,79 @@ Dropout Specifications
 Architecture 
 
 ### Convolutional Neural Networks
+Image processing
+-Filtering with kernel
+    - Blur
+    - Outline
+        - Gray Scale
+
+Overlay kernel over image
+Zero padding
+Multiply - scale image to make sure it between 0 - 255
+This will find the outline
+
+Applying to neural network
+filtering with kernel with weights
+Which is called a convolutional layer
+Receptive field, for every neuron we have subsets of rows where neurons are aware of
+    - Reduces parameters from 256 to 9
+    - Shares the 9 parameters across the entire layer
+    - Kernel dimension usually 3x3, 5x5, 7x7 odd numbers to use centering
+    - Padding
+    - Can stack multiple kernels for multiplication to make output feature maps / images
+
+Initialization will help kernel learn different things
+Channels
+Split images into RGB and then do filtering with kernels
+Then after we sum the results for one feature map 
+
+Layer processing
+Given: Image with 3 channels, 185x185 dimensions
+Use:
+5x5 kernel 
+Valid zero padding
+Stride 2
+Feature maps:
+6 channels
+91x91 dimensions
+
+To find new dimensions 
+[ n input + 2p-k/s] + 1
+[dimension of input + 2*padding - kernel size / stride] + 1
+
+    - More than one conv layer is typically used
+    - The earlier layers learn line and corners
+    - The deeper layers learn curves and shapes from the lines and corners
+
+Larger strides smaller dimension outcome, but preserve important parts of image
+
+Pooling layer
+Like filtering with a kernel, max pooling outputs the highest value from the filtering 
+Reduces dimensions and outputs the important parts of the image
+This techniques makes it shift invariant 
+Can do avg pooling but max pooling preferred 
+When using max pooling, it will reduce the dimensions but will keep the channels
+Flatten map
+Makes all stacked maps into a flatten map
+
+Model:
+Layers: Input -> ConvL -> Max Pool Layer -> ConvL -> Flatten
+Hyperparameters 
+    - Regularization
+    - Optimizers
+    - Initialization
+Training 
+    - Split, Training, Validation, Test
+    - Epoch
+    - Mini Batch
+
+When over fitting add drop out
+When its too slow to converge add batch normalization
+
+State of the Art CNN
+    - Alex net
+    - Res net
+    - Google net
 ### Recurrent Neural Networks
 ### Generative Adversarial Neural Networks
 ## Recommendation Systems
@@ -933,3 +1006,36 @@ A regularization technique used per layer to reduce over fitting. Dropout involv
 A supervised learning task in which there are two possible outputs
 ### Pruning Neurons
 Removing neurons from a neural network in an effort to reduce the number of model parameters if by removing the neurons equivalent performance can be obtained
+### Fully Connected Neural Network
+A neural network that has every neuron connected to every other neuron in subsequent layer; also called a dense layer
+### Image Kernel 
+A single array consisting of some defined numbers, which is applied to an image for some desired effect. Usually used in the context of image filtering
+### Image Padding
+Adding a border of zero-valued pixels to an input image. The goal of padding is typically to ensure that the dimensions of an image remain thesame after applying an image kernel. Libraries typically allow two options: Valid padding, which means not to pad the image and same padding which means to zero-pad the image
+### Convolutional Layer
+Similar to fully connected neural layer; however, each neuron is only connected to a subset of neurons in the subsequent layer with respect to a receptive field 
+### Receptive Field
+The number of neurons in a preceding layer which are connected to an adjacent layer of neurons. The largest receptive field a fully-connected neural network
+### Stride
+The incremental rate at which a kernel is applied to an image or feature map
+### Feature Map
+The result of applying a kernel to an image or to another feature map
+### Channels
+The number of stacked image, typically representing Red Green Blue pixels, or the number of feature maps produced by a convolutional layer
+### Pooling
+Most often max pooling and sometimes average pooling, in which a kernel is applied to an image and the max or average of the pixel values in the kernel overlay is the resulting pixel value in the output image
+### Shift Invariance
+One of the goals of a convolutional neural network: objects within an image can be in different areas of the image yet still be recognized
+### Flatten Layer
+Takes in a series of stacked feature maps and flattens out all of the values into a single feature vector
+### Mechanical Turk
+A crowdsourcing service which performs on-demands tasks that computers are currently unables
+### Batch Normalization
+The process of normalizing values by means of re-centering (subtracting the mean) or re-scaling (dividing by the standard deviation) before they go to subsequent layers in the neural network. The goal is to accelerate the learning of deep neural networks by decreasing the number of epochs required for the loss function to converge
+### Keras
+Software  that acts as an interface for Tensorflow and aims to simplify the experience of working with neural networks
+### Graphics Processing Units
+A specialized device that has many cores, allowing it to perform many operations at a time.
+GPUs are often used within deep learning to accelerate training of neural networks by taking advantage of their ability to perform many parallel computations
+### Pre-Trained Models
+Models which have already been trained. These trained models can be used as layers like embedding layers of not yet trained neural networks to increase performance of these neural networks
