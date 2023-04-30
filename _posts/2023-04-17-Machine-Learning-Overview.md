@@ -702,6 +702,68 @@ State of the Art CNN
     - Res net
     - Google net
 ### Recurrent Neural Networks
+Cannot use fully connected neural network if there are different sized inputs
+To fix this we can set a fixed length of message to send and receive
+
+Given message -> Array of strings, index becomes identifier
+Initial message will get padding
+Goes through hidden layers and we get our yhat
+Map it back through the dictionary
+
+Or we can do recurrent network
+Use same neuron, then added is another summation of activation function into a hidden state
+Sliding window input to this neuron
+Attach hidden state to softmax -> max output is the length of set output
+
+We can add  a layer of hidden state activators after a fully connected layer from the input
+To get better responses
+Then soft max all hidden state
+Adjust window size
+
+Optimization
+
+Loss
+    - Categorical cross-entropy
+    - Soft Max activation
+    - Words in the vocabulary
+
+Training
+Back Propagation Through Time
+Loss summation through each sliding window step
+Gradient of loss will be sum of loss at time t
+DeltaLoss = SumT of Delta Loss at T
+Uses chain rule
+Hidden state relies on previous hidden state 
+So we need to have all the previous time step
+
+As time step increase gradient zero is more likely with vanishing gradient
+    - Loss of memory as time goes on
+    
+To solve this we can use 
+Long Short Term Memory
+LSTM
+    - RNN
+    - Uses gates to control what gets remembered, ignored, and recalled
+Goes through different gates
+1. Forget gate takes previous hidden states, tells what memory can forget based on long term memory
+2. Input gate, we have two fully connected layer tanh and sigmoid - 0-1, how much of the input goes into long term memory
+3. Output layer, specify how much of long term memory can be recalled - previous hidden state and input
+
+You can have two adj LSTM which is called a stacked lstm and use soft max to unify output
+    - Bidirectional LSTM -> Two LSTMS
+    - GRU
+        - No cell state, only hidden
+        - Two gates, resets and updates
+
+alter input to optimize
+Embedding Layer        
+    - Takes in the number of total words and dimensions to use for the words - creates a map and values are embedded values
+    - Better predictive performance
+    - Transplants embedding layers into your model
+    - Glove and word lucc
+alter output to optimize
+    - hierarchical soft max -> represent as a tree
+
 ### Generative Adversarial Neural Networks
 ## Recommendation Systems
 ### Collaborative and Content Based Filtering
@@ -1039,3 +1101,19 @@ A specialized device that has many cores, allowing it to perform many operations
 GPUs are often used within deep learning to accelerate training of neural networks by taking advantage of their ability to perform many parallel computations
 ### Pre-Trained Models
 Models which have already been trained. These trained models can be used as layers like embedding layers of not yet trained neural networks to increase performance of these neural networks
+### Recurrent Neural Network
+Also RNN, a neural network in which the output is routed back into the network to be used with subsequent input
+### Hidden State
+The output of the recurrent neural network at the previous timestep
+### Cell State
+Used within a long short-term memory LSTM acting as additional hidden state
+### Backpropagation Through Time
+Backpropagation with an RNN in which an additional partial derivative term is calculated per time step that the input required
+### Long Short Term Memory 
+A type of RNN with a cell and hidden state, input gate, forget gate, and an output gate
+### Gated Recurrent Unit
+A type of RNN with a hidden state, update gate, reset gate
+### Embedding Layer
+Typically used as a first layer in a neural network which is optimized to transform the input in an effort to maximize
+### Gradient Clipping 
+Capping the value that the gradient is allowed to be. This is typically used in an effort to avoid exploding gradients. However, initialization techniques are favored
