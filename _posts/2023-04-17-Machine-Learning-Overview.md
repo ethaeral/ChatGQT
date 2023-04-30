@@ -765,6 +765,26 @@ alter output to optimize
     - hierarchical soft max -> represent as a tree
 
 ### Generative Adversarial Neural Networks
+Model
+Two neural network in self
+Generator -> Attempt to generate 
+    - Loss, min loss
+Discriminator -> Tries to correct generator
+    - Loss, maximize loss
+Use min max loss
+
+Images:
+Convolutional 
+Pixel Shuffle -> increases dim but reduces feature maps
+
+Training
+Mini-batch of lb
+Avoid mode collapse -> unrolled GAN
+
+Evaluation
+MSE
+PSNR - images
+
 ## Recommendation Systems
 ### Collaborative and Content Based Filtering
 ## Ranking
@@ -1117,3 +1137,7 @@ A type of RNN with a hidden state, update gate, reset gate
 Typically used as a first layer in a neural network which is optimized to transform the input in an effort to maximize
 ### Gradient Clipping 
 Capping the value that the gradient is allowed to be. This is typically used in an effort to avoid exploding gradients. However, initialization techniques are favored
+### Generative Adversarial Networks
+Also GANs, take advantage of a concept called adversial min max. The generator generates fake data and tries to minimize a particular loss function and the dscriminator tries to correctly identify fake data from real data in an effort to maximize a partciular loss function.
+### Mode Collapse
+A challenge of training GANs in which the generator data which successfully confuses the discriminator and so the generator exploits this vulnerability and only produces that particular data over and over. A way to mitigate this is to force the generator to see responses from the discriminator multiple timesteps ahead. One such method is called an Unrolled Gain
