@@ -786,6 +786,102 @@ MSE
 PSNR - images
 
 ## Recommendation Systems
+Collaborative Filtering
+if user n reads post k, that is marked as 1 as an interaction
+User categories are made by users with similar post interactions and are recommended post from the user group that user hasn't interacted with
+Similarity is measured in 
+For binary indicators
+Jaccard
+matching interactions / matching interactions + non matching interactions
+Cosine
+Add product of two users / multiply the entry of ea. user squared
+Hamming distance
+Sum up the differences 
+
+Prediction:
+Response u1 = sum of sim(u1,ui) * response ui / sum of |sim(u1,ui)|
+
+For non binary indicators
+Similarity metrics
+Euclidean 
+Manhattan 
+Pearson Correlation
+Cosine
+
+sum (u1 - mu of u1)(u2 - mu of u2) / multiply users sq sum of (ui - mu ui)^2
+prediction formula:
+response = sum of sim (p1,pi) * response u21pi / sum sim(p1,pi)
+evaluation: MSE
+
+Item based collab filtering 
+1. Calculate item-item similarity matrix
+2. Predict response for ui
+3. Recommend the item with the highest prediction
+
+User-based
+Time Complexity
+O(U*P) -> O(U+P)
+Pro
+Greater diversity
+Con 
+Expensive
+
+Item Based
+Time Complexity
+O(U * P^2) -> O(U * P)
+Pro
+Less Re-calculations
+Con 
+Lack of diversity
+
+Memory-based Recommender systems
+User-based
+    - Apply time decay to the prediction
+Item-based
+    - Apply more weight to less frequented items
+Better used when not alot of user or products
+
+When a lot of users and items use
+Matrix Factorization
+Good in practice, u and p are generally same size
+
+In the user item matrix, factorizes into terms
+matrix hat u*p = U P + bias p + bias u
+Loss = 1/n sum (matrix u*p - U P + bias p + bias u)^2
+We can also add regularization to bias
+
+Implicit ratings, we can use binary matrix and transform it into a non binary matrix
+
+Cant use ordinally least sq we have to use alternating least sqs
+Keeps constant one of the values we're solving then go to the next
+
+Retraining
+Deep Learning Extension 
+Inputs would have their own embedding layers
+Then to connected layers 
+There would be linear activation
+
+Collab challenges 
+    - Cold start
+        - Brand new users and items
+        - Can't recommend
+            - Rec popular
+            - Rec based on category selected
+    - Echo chamber
+        - Seeing same thing recommendation
+            - Show more diversity
+    - Shilling attack
+        - Users manipulate rating
+
+Content based Filter
+    - No need for others users' data
+    - Requires context about the items
+
+Deep Learning Hybrid to mix user/item and content based
+
+Use side features for content on the deep learning extension
+
+
 ### Collaborative and Content Based Filtering
 ## Ranking
 ### Learning to Rank
@@ -1141,3 +1237,27 @@ Capping the value that the gradient is allowed to be. This is typically used in 
 Also GANs, take advantage of a concept called adversial min max. The generator generates fake data and tries to minimize a particular loss function and the dscriminator tries to correctly identify fake data from real data in an effort to maximize a partciular loss function.
 ### Mode Collapse
 A challenge of training GANs in which the generator data which successfully confuses the discriminator and so the generator exploits this vulnerability and only produces that particular data over and over. A way to mitigate this is to force the generator to see responses from the discriminator multiple timesteps ahead. One such method is called an Unrolled Gain
+### Content Filtering 
+A recommendation technqiue which takes into account a single user's features and many items' features
+### Collaborative Filtering
+A recommendation technqiue which uses many user's and item's data typically in the form a user-item matrix
+### User-item Matrix
+A matrix which contains the interactions of users and items. Items can take tghe form of products, music, and videos
+### Pearson Correlation
+A measure of the correlation between two inputs. In the context of recommendation systems. Pearson correlation can be used to construct an item-item similarity matrix
+### Time Decay
+The added modelling assumption that interactions between  items and users should count for less over time
+### Inverse User Frequency
+The added modelling assumption that if a user interacts with a less overall popular item, then the interaction should count for more.
+### Matrix Factorization
+Factors the user-item matrix into embeddings such that multiplying together the resulting embedding layers gives an estimate for the original user-item matrix
+### Implicit Rating
+A rating obtained from user behavior as opposed to surveying the user
+### SparkML
+Refers to APIs which provide machine learning capabilities on Spark data frames
+### Cold start
+A challenge with recommendation systems in which users or items are new and there is limited or no information in terms of the user-item matrix. This can make personalized recommendations difficult or impossible
+### Echo Chamber
+A state of recommendation system in which  user behavior is reinforced by the recommendations themselves.
+### Shilling Attack
+A type of attack on a recommendation system in which users manipulate the recommendations by inflating or defalting the positve interactions for their own or competing items 

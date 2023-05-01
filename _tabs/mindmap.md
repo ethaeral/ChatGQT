@@ -17,3 +17,7 @@ Aiding studying
 Creating a studying path to a goal  
     Enter a topic interest will generate ghost nodes and pathways that users can interact with and get recommended sources  
 [ChatGPT integration](https://openai.com/blog/introducing-chatgpt-and-whisper-apis)  
+
+Algorithm Decision Tree
+
+Job Applier AI
