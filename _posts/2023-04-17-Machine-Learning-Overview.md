@@ -3,6 +3,7 @@ title: Machine Learning Overview
 date: 2023-04-17 00:00:00 -0500
 categories: [Core]
 tags: [forme, interview prep, notes]
+math: true
 ---
 ----
 ##### 📑 **Requirements**:
@@ -10,7 +11,11 @@ tags: [forme, interview prep, notes]
 ##### 😝 **Cool Level**:
 ###### 8/10
 ----
-## Perquisites
+$$ 
+x = y ^2 
+$$
+
+## Maffs
 Things to be familiar with: 
 Machine Learning:
 - Features
