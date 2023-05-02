@@ -786,6 +786,7 @@ MSE
 PSNR - images
 
 ## Recommendation Systems
+### Collaborative and Content Based Filtering
 Collaborative Filtering
 if user n reads post k, that is marked as 1 as an interaction
 User categories are made by users with similar post interactions and are recommended post from the user group that user hasn't interacted with
@@ -882,9 +883,71 @@ Deep Learning Hybrid to mix user/item and content based
 Use side features for content on the deep learning extension
 
 
-### Collaborative and Content Based Filtering
+
 ## Ranking
 ### Learning to Rank
+Candidate generation
+Matrix factorization
+Plot the embedding 
+Top k, to find this
+Euclidean distance
+cosine similarity
+dot product
+
+Deep recommendation systems
+Also have embedded layers and plot them as well
+
+Give a initial ranking then as users start clicking, it then learns to rank and gives the model feedback
+
+Using loss function -> using gradient descent for loss function
+
+When adjusting the prediction based on the user feedback, the predict will say the true or false in label rules in comparison to two items
+
+Paralell documents
+Users and Document -> COnnected Layers -> Linear Activation
+
+RankNet Pairwise may not be best penalty, might want to consider more documents in the penalty, its pretty inefficient
+
+LambdaNet 
+    - more efficient,can find gradient update for a document in comparison to all others
+    - NDCG, considers more than a pair of documents, normalized discounted cumulative gain
+        - considers document up to position p
+        - to compare dcg across users, normalize
+            - allows us to use the same loss for all users
+        - incorporate into loss
+            - not differentiable
+
+Update function
+Difference is that you are subtracting terms instead of adding them
+
+Lambda MART
+    - Lambdanet but uses gradient boosted trees
+        - Lambda in place of gradient
+    - Appears to be pairwise, but the nDCGp considers elements beyonds pairs
+
+Why is it called gradient boosted tree, it uses MSE to pass to the next tree
+
+Implicit Relevance Feedback
+Using multiple user feedback to generate a ranking
+
+Evaluation Metrics
+    - nDCG: average across all users
+    - mean average precision - binary
+        - usually calculated for some position p(like nDCG)
+        - averaged across all users
+    - mean reciprocal rank - binary
+        - average across all users
+    - sometimes it preferable to encode n-ary labels as binary for evaluation
+    - all of these can be used in the lambda
+
+Steps
+1. Generate top k from labels with embeddings
+2. Top k candidates from each generator will be ranked via LambdaMart for each user
+3. De Bias our clicks
+    - Presentation / Trust bias
+        - If the post is even seen
+        - Even if it is seen, they may not interact because it's far down the results
+
 
 ## Key Terms
 ### Ranking  
@@ -1261,3 +1324,25 @@ A challenge with recommendation systems in which users or items are new and ther
 A state of recommendation system in which  user behavior is reinforced by the recommendations themselves.
 ### Shilling Attack
 A type of attack on a recommendation system in which users manipulate the recommendations by inflating or defalting the positve interactions for their own or competing items 
+### Candidate Generator
+A system which outputs the candidates to be ranked. This is sometimes referred to as retrieving the top-k
+### Embedding Space
+The n-dimensional space where embeddings exist. Typeically, the emebedding space can be used to generate the top-k candidates by the using the k-nearest neighbors algorithm
+### Cosine Similarity
+A smiliarity metric which is equal to the cosine of the angle between two inputs in some embedding space
+### Linear Activation
+A symmetric activation function which assigns the output as the value of the input
+### Normalized Discounted Cumulative Gain
+An information retrieval metric which assigns a value of a particular ranking based on each item's position relevance
+### Mean Average Precision
+A binary ranking metric which takes into account the relevance of ranked items with regards to their position
+### Mean Reciprocal Rank
+A binary ranking metric which takes into account the first spot in a ranking which contains a relevant item
+### Shrinkage
+A learning rate for gradient boosted trees
+### Side Features
+Features in addition to item and user embeddings. This can include properties of items and users
+### Implicit Relevance Feedback
+Feedback obtained from user behavior as opposed to surveying the user
+### Presentation and Trust Bias
+Biases found within ranking which arise from the placement of items within a ranking
