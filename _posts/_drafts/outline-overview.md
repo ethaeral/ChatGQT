@@ -1,11 +1,13 @@
 # Outline
 ## Section
 ### Subsection 
-    - Overview
-        - Algorithm to Use
+    - Overview description
+    - Algorithm to Use
     - Best used for
     - Not great for
     - Steps to perform
+    - Libraries that use this
+    - Python code
 ---
 ## Foundational
 ### Features
@@ -48,9 +50,11 @@
         - Beta
 ## Supervised Learning
 ### Naive Bayes
-    - Overview: Known as a probabilistic classifier
-        - Algorithm to Use
+    - Overview description
+    - Algorithm to Use
     - Best used for
     - Not great for
     - Steps to perform
+    - Libraries that use this
+    - Python code
 
