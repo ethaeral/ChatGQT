@@ -21,3 +21,22 @@ Creating a studying path to a goal
 Algorithm Decision Tree
 
 Job Applier AI
+
+
+```
+Learning Goals:
+
+What problem do I solve
+What is the value of this solution
+
+What does this solution show I have technical experience 
+```
+
+TODO
+```
+Get involved with the community
+Learn relevant technologies, specialize in a tool and understand decision tree and trade off
+Focus on software engineering principles and fundamentals
+Use known design patterns
+Show what you know blog it out
+```
