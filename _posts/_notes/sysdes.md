@@ -183,3 +183,36 @@ Short for  Secure Hash ALgorithms, the SHA is a collection of cryptographic hash
 
 ### Relational Database
 
+Relational Database
+A type of structured database in which data is stored following a tabular format; often supports powerful querying using SQL
+
+Non-Relational Database
+In contrast with relational database (SQL databases), a type of database that is free of imposed, tabular-like structure. Non-relational databases are often referred to as NoSQL databases.  
+
+SQL 
+Structured Query Language. Relational databases can be used using a derivative of SQL such as PostgreSQL in the case of Postgres.
+
+SQL Database   
+Any database that supports SQL. This term is often used synonymously with "relational database", though in practice, not every relational database supports SQL  
+
+NoSQL Database
+Any database that is not SQL-compatible is called noSQL
+
+ACID Transition
+A type of database transaction that has four important properties: 
+- Atomicity: The operations that constitutes the transaction will either all succeed or all fail. There is no in-between state
+- Consistency: The transaction cannot bring the database to an invalid state. After the transaction is committed or rolled back, the rules for each record will still apply, and all future transactions will see that effect of the transaction. Also named Strong Consistency 
+- Isolation: The execution of multiple transactions concurrently will have the same effect sequentially
+- Durability: Any committed transaction is written to non volatile storage. It will not be undone by a crash, power loss, or network partition
+
+Database Index
+A special auxiliary data structure that allows your database to perform certain queries much faster. Indexes can typically only exists to reference structured data, like data stored in relational databases. In practice, you create an index on one or multiple columns in your database to greatly speed up read queries that you run very often, with the downside of slightly longer writes to your database, since writes have to take place in the relevant index
+
+Strong Consistency 
+Strong consistency usually refers to the consistency of ACID transactions as eventual consistency
+
+Eventual consistency 
+A consistency model which is unlike strong consistency. In this model, reads might return a view of the system that is stale. An eventually consistent datastore will give guarantees that the state of the database will eventually reflects writes within a time period
+
+Postgres
+A relational database that uses dialect of SQL called PostgreSQL. Provides ACID transactions.
