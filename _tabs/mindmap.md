@@ -53,3 +53,14 @@ MICRO TODO:
 - Steps to perform
 - Further resources
 - Field expert
+
+```
+Think about what is the algo going to used for
+    - Restrictions: Memory, Hardware
+Think of possible solutions for ea. scenario
+- Memory constraint -> just use more CPU
+    - Streaming
+- CPU constraint -> just use more Memory
+    - Per CPU core / thread 
+- Time constraints -> Batch / Chunking / Parallel processing 
+```

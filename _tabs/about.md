@@ -91,7 +91,7 @@ Massachusetts Bay Community College, AAS in General Studies
 - An implementation of a mock AST feature of VSCode’s function definition and references
 - JavaScript, NodeJS
 
-[**Ubuntu Desktop Clone**](portfolio-sandy.vercel.app) - 2020
+[**Ubuntu Desktop Clone**](https://portfolio-31gb9jfih-alinanguon.vercel.app/) - 2020
 
 - Personal Portfolio Website that mocks ubuntu UI
 - React, JavaScript
