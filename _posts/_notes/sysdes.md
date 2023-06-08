@@ -248,6 +248,7 @@ Zookeeper is strongly consistent, highly available key-value store. It's often u
 
 
 ### Specialized Storage Paradigm 
+Blob = binary large object - unstructured data
 
 Blob Storage
 Widely used kind of storage, in small and large scale systems. They don't really count as databases per se, partially because they only allow the user to store and retrieve data based on the name of the blob. This is sort of like a key-value store but usually blob stores have different guarantees. They might be slower than KV stores but values can be megabytes large or sometimes gigabytes large. Usually people use this to store things like large binaries, databases snapshots, or images and other static assets that a website might have.
@@ -317,6 +318,14 @@ Hot Spot
 When distributing a workload across a set of servers, that workload might be spread unevenly. This can happen if your sharding key or your hashing function are suboptimal, or if your workload is naturally skewed: some servers will receive a lot more traffic than others, thus creating hot spot
 
 ### Leader Election
+Why: 
+If you want to connect to a third party service, but need to access database, you need a server in between to protect your information. To keep this important server up, you may use redundancy and do not want duplicate requests this is where leader election comes in. One server is responsible for these requests until they die
+
+Use cases:
+Transaction management and banking systems
+Auto scaling in cloud distributed data structure in sharding
+Any cluster management
+
 Leader Election
 The process by which nodes in a cluster (for instance, servers in a set of servers) elect a so-called "leader" amongst them, responsible for the primary operations of the service that these nodes support. When correctly implemented, leader election guarantees that all nodes in the cluster know which one is the leader at any given time  and can elect a new leader if the leader dies for whatever reason
 
@@ -331,3 +340,149 @@ Etcd is strongly consistent and highly available key-value store that's often us
 
 ZooKeeper
 ZooKeeper is strongly consistent, high available key-value store. It's often used to store important configuration or to perform leader election
+
+### Peer-To-Peer Networks
+
+Deploy large files to thousands of machines, chucks data, and peers connect with other peers with mutual benefits to complete the file
+
+
+Peer to Peer Networks
+A collection of machines referred to as peers that divide a workload between themselves to presumably complete the workload faster than would otherwise be possible. Peer to peer networks are often used in file distribution systems - like torrents
+
+
+Gossip Protocol - Peer discovery, peer selection
+When a set of machines talk to each other in an uncoordinated manner in a cluster to spread information through a system without requiring a central source of data
+
+### Polling and Streaming
+Polling 
+The act of fetching a resource or piece of data regularly at an interval to make sure your data is not too stale 
+- Client request data
+
+Streaming  
+In networking, it usually refers to the act of continuously getting a feed of information from a server by keeping an open connection between two machines or processes
+- Clients get data pushed to it
+
+### Configuration
+Configuration
+A set of parameters or constants that are critical to a system. Configuration is typically written in JSON or YAML and can be either static, meaning that it's hard-coded in and shipped with your system's application code (like frontend code, for instance) or dynamic, meaning that it lives outside of your system's application code
+
+### Rate Limiting 
+Rate Limiting 
+The act of limiting the number of requests sent to or from a system. Rate limiting is most often used to limit the number of incoming requests in order to prevent a DoS attacks and can be enforced at the IP-address level, at the user-account level, or at the region level, for example. Rate limiting can also be implemented in tiers; for instance, a type of network request could be limited to 1 per second, 5 per 10 seconds, and 10 per minute
+
+Ask if you need to have rate limiting tier
+Use case: user would benefit from a constant request like code running
+
+DoS Attack
+Short for denial of service attack a DoS attack is an attack in which a malicious user tries to bring down or damage a system in order to render it unavailable to users. Much of the time, it consists of flooding it with traffic. Some DoS attacks area easily preventable with rate limiting, while others can be far trickier to defend against 
+
+DDoS Attack
+Short for distributed denial of service attack, a DDoS attack in which the traffic flooding the target system comes from many different sources (like thousands of machines), making it much harder to defend against
+
+Redis
+An in-memory key-value store. Does offer some persistent storage options but is typically used as a really fast, best-effort caching solution. Redis is also often used to implement rate limiting
+
+### Logging and Monitoring
+Logging
+The act of collection and storing logs -- useful information about events in your system. Typically your programs will output log messages to its STDOUT or STDERR pipes, which will automatically get aggregated into a centralized logging solution
+
+Monitoring 
+The process of having visibility into a system's key metrics, monitoring is typically implemented by collecting important events in a system and aggregating them in human readable charts
+
+Alerting 
+The process through which systems administrators get notified when critical systems issues occur. Alerting can be set up by defining specific thresholds on monitoring charts, past which alerts are sent to a communication channel like slack
+
+### Publish/Subscribe Pattern
+Publish/Subscribe Pattern
+Often shortened as Pub/Sub, the publish/subscribe pattern is a popular messaging model that consists of publishers and subscribers. Publishers publish messages to special topics - sometimes called channels without caring about or even knowing who will read those messages, and subscribers subscribe to topics and read messages coming through those topics.
+
+Pub/sub systems often come with very powerful guarantees like at-least-once delivery, persistent storage, ordering of messages, and replayability of messages
+
+Idempotent Operation
+An operation that has the same the same ultimate outcome regardless of how many times it's performed. If an operation can be performed multiple times without changing its overall effect, its idempotent, since pub/sub systems tend to allow the same messages to be consumed multiple times.
+
+For example, increasing an integer value in a database is not an idempotent operation, since repeating this operation will not have the same effect as if it has been performed only once. Conversely setting a value to COMPLETE is an idempotent operation, since repeating this operation will always yield the same result: the value will be COMPLETE
+
+Apache Kafka 
+A distributed messaging system created by Linkedin. Very useful when using the streaming paradigm as opposed to polling
+
+Cloud Pub/Sub
+A highly-scalable Pub/sub messaging service created by Google. Guarantees at-least-once delivery of messages and supports "rewinding" in order to reprocess messages
+
+### MapReduce
+MapReduce 
+A popular framework for processing very large datasets in a distributed setting efficiently, quickly, and in a fault-tolerant manner. A MapReduce job is comprised of 3 main steps:
+- A Map step, which runs a map function on the various chunks of the dataset and transforms these chunks into intermediate key-value pairs
+- The Shuffle step, which reorganizes the intermediate key-value pairs such that pairs of the same key are routed to the same machine in the final step
+- Reduce step, which runs a reduce function on the newly shuffled key-values pairs and transforms the into more meaningful data
+
+The canonical example of a MapReduce use case is counting the number of occurrences of words in a large text file
+
+When dealing with a MapReduce library, engineers and/or systems administrators only need t o worry about the map and reduce functions, as well as their inputs and outputs. All other concerns, including the parallelization of tasks and the fault-tolerance of the MapREduce job are abstracted away and take care of by the MapReduce implementation
+
+
+Distributed File System
+A distributed file system is an abstraction over a usually large cluster of machines that allows them to act like on large file system. THe two most popular implementation of a DFS are the Google FIle System and the Hadoop Distributed File System
+
+Typically DFSs takes care of the classic availability and replication guarantees that can be tricky to obtain in a distributed system setting. The overachieving idea is that files are split into chunks of a certain size 4MB or 64MB for instance and those chunks are sharded across a large cluster of machines. A central control plane is in charge of deciding where each chunk resides, routing reads to the right nodes, and handling communications between machines.
+
+Different DFS implementations have slightly different APIs and semantics, but they achieve the same common goal: extremely large-scale persistent storage
+
+Hadoop
+A popular, open-source framework that supports MapReduce jobs and many other kinds of data processing pipelines. IT's central component is HDFS on top of which other technologies have been developed
+
+### Security And HTTPS
+Man in the The Middle Attack
+An attack in which the attacker intercepts a line of communication that is thought to be private by two communicating parties.
+
+If a malicious actor intercepted and mutated an IP packet on its way from a client to a server, that would be a man in the middle attack
+
+MITM attacks are the primary threat that encryption and HTTPS aim to defend against 
+
+Symmetric Encryption
+A type of encryption that relies on only a single key to both encrypt and decrypt data. The key must be known to all parties involved in communication and must therefore typically be shared between the parties at one point or another
+
+Symmetric-key algorithms tend to be faster than their asymmetric counterparts
+
+The most widely used symmetric key algorithm are parts of the advanced encryption standards
+
+Asymmetric Encryption
+Also known as public key encryption, asymmetric encryption relies on two keys - a public key and a private key - to encrypt and decrypt data. The keys are generated using cryptographic algorithms and are mathematically connected such that data encrypted with the public key can only be decrypted with private key
+
+While the private key must be kept secure to maintain the fidelity of this encryption paradigm, the public key can be openly shared.
+
+Asymmetric-key algorithms tend to be slower than their symmetric counterparts
+
+AES
+Stands for Advanced Encryption Standard. AES is a widely used encryption standard that has three symmetric key algorithms
+
+Of note, AES is considered to be the gold standard in encryption and is even used by the US National Security Agency to encrypt top secret information
+
+HTTPS
+The HyperText Transfer Protocol Secure is an extensions of HTTP that's used for secure communication online. It requires servers to have trusted certificates usually SSL certificates and uses the Transport Layer Security TLS a security protocol built on top of TCP, to encrypt data communicated between a client and a server
+
+TLS
+The Transport Layer Security is security protocol over which HTTP runs in order to achieve secure communication online HTTP over TLS is also known as HTTPS
+
+SSL Certificate
+A digital certificate granted to a server by certificate authority. Contains the server's public key, to be used as part of the TLS handshake process in an HTTPS connection
+
+An SSL certificate effectively confirms that a public key belongs to the server claiming it belongs to them. SSL certificates are a crucial defense against man-in-the-middle attacks
+
+Certificate Authority
+A trusted entity that signs digital certificates - namely, SSL certificates that are relied on in HTTPS connections
+
+TLS Handshake
+The process through which a client and a server communicating over HTTPS exchange encryption-related information and establish a secure communication. The typical steps in a TLS handshake are roughly follows:
+- The client sends a client hello - a string of random bytes - to the servers
+- The server responds with a server hello - another string of random bytes - as well as its SSL certificate, which contains its public key
+- The client verifies that the certificate was issued by a certificate authority and sends a pre master secret - yet another string of random bytes, this time encrypted with the server's public key - to the server
+- The client and the server use the client hello, the server hello, and the pre master secret to then generate the same symmetric-encryption session keys, to be used to encrypt and decrypt all data communicated during the remainder of the connection
+
+### API Design
+Pagination
+When a network requests potentially warrants a really large response, the relevant API might be designed to return only a single page of that response, a limited portion of the response accompanied by an identifier or token for the client to request the next page if desired 
+
+Pagination is often used when designing List endpoints. For instance, an endpoint to list videos on the YouTube Trending page could return a huge list of videos. This wouldn't perform very well on mobile devices due to the lower network speeds and simply wouldn't be optimal, since most users will only ever scroll through the first ten or twenty videos. So, the API could be designed to respond with only the first few videos of that list; in this case, we would say that the API response is paginated
+
+CRUD Operations
