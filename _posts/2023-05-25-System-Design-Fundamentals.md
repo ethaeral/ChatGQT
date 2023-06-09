@@ -1,7 +1,7 @@
 ---
 title: System Design Fundamentals
 date: 2023-05-25 00:00:00 -0500
-categories: [Core]
+categories: [Core, System Design]
 tags: [forme, interview prep, notes]
 ---
 Context Collection:     
