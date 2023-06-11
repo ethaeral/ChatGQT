@@ -10,10 +10,17 @@ tags: [forme, interview prep, notes]
 An ordered series of interactions that users have with some interface. In the traditional sense, this can be literal clicks of a mouse on a desktop browser. Interactions can also come from touchscreens and conversational user interface
 #### Change Data Capture
 The process of recording changes in the data within the database system. For instance, if a user cancels their Netflix subscription, then the row can be recorded and referenced later for analysis or audit purposes
+Producer        -> Broker Cluster -> Consumer (Storage)
+binlogs 
+segment idx
+change streams
 #### Apache Kafka
 An open-source software platform which provides a way to handle real time data streaming
+(Inside of Apache Kafka)
+Producers (Clickstream logs) -> Broker Cluster with Leader Election and Replication (Zoo Keeper) -> Consumer (Storage)
 #### Amazon Kinesis
 An AWS product that provides a way to handle real-time data streaming
+Producers (Clickstream logs or any streaming data for ingestion) -> Shards -> Consumers(Storage)
 #### Zookeeper
 A service designed to reliably coordinate distributed systems via naming service, configuration management, data synchronization, leader election, message queuing, or notification systems
 #### Database
@@ -22,8 +29,36 @@ A tool used to collect and organize data. Typically, database management systems
 Online transaction processing. A system that handles (near) real-time business processes. For example, a database that maintains a table of the users subscribed to Netflix and which is then used to enable successful log-ins would be considered OLTP. This is opposed to OLAP.
 #### OLAP
 Online analytical processing. A system that handles the analytical processes of business, including reporting, auditing, and business intelligence. For example, this may be a Hadoop cluster which maintains user subscription history for Netflix.
+
+Producer (OLTP) -> Broker Cluster -> Consumer (OLAP)
+
 #### Availability Zone
 Typically a single data center within a region which has two or more data centers. The term multi-AZ implies that an application or software resource is present across more than on AZ within region. This strategy allows the software resources
+
+#### Live Videos / Live Streams
+- Ingesting video content from traffic cameras, security cameras, video streaming services
+- Example: HTTP Live Stream HLS
+    - H.264 compression
+    - AAC for sound
+    - Effectively chops MP4s up into segments send them out over HTTP
+
+Producers -> Collector Layer -> Broker Cluster -> Consumer (Storage)
+- Cameras
+
+#### Batch Ingestion
+- Databases
+    - Periodic 'snapshots' of the databases
+    - Useful when onboarding a new database to be ingested
+Producer              -> Broker Cluster -> Consumer
+- mySQL mysqldump
+- Cassandra CQL copy
+- MongoDB mongoexpert
+
+#### Ingestion Consideration
+- Size of individual data
+- Rate at which data comes in
+- Support of data types (changing data types)
+- High-availability(multi-AZ) and fault tolerance
 ### Data Storage
 #### Hard Disk Drive
 A storage device which operates by settings bits on a spinning magnetic disk. THe capacity and the read/write performance of the HDD are the main characteristics to consider when using an HDD within a particular system
@@ -31,12 +66,31 @@ A storage device which operates by settings bits on a spinning magnetic disk. TH
 A strategy used to mitigate the potential data loss in the event of a system or component failure. IIN the most basic form, it involves writing identical data to more than one device or location. MOre efficient techniques like erasure coding incorporate mathematics to recover lost data without referring to an explicit copy of the data.
 #### Hadoop Distributed File System
 An open-source Apache software product which provides a distributed storage framework
+               -> Name Node Cluster with hot stand by -  Keeps track of which bit of data goes where
+Request -> HDFS Client -> Data Node 2
+                -> Data Node 1
+
+Uses erasure coding instead of simple replication with an XOR to create a parity bit or something more advance like Reed-Soloman encoding
+
+Sometimes data replication can happen through the process of the producer, broker, and consumer acknowledgements to prevent that we can use Kafka Connector sink -> Exactly-once Semantics
+
+Connects broker and consumer, will guarantees no duplicates
 #### Avro
 A row-oriented data serializer provided by Apache
+- Good for queries which need all columns
+- Good for heavy write load
+- JSON schema supports evolutions
 #### Parquet
 A column-oriented data storage format provided Apache
+- Good for queries which need some columns
+- Good for heavy read load
+- Schema challenged with evolution
+- Good for sparse data
+- Good compression performance
 #### Exactly-once Semantics 
 Guarantees that an object within a distributed system is processed exactly once. Other semantics include maybe, at-least-once and at-most-once
+#### Kafka Transactions
+- Uses unique transactional IDs for each producer tied to metadata to ensure that each data committed to the broker is complete -> Sometimes Kafka Streams API simplifies code
 ### Data Processing
 #### Recommendation Carousel
 A component within a graphical or conversational user interface which presents recommendations to a user. This can include products, ads, and media content.
