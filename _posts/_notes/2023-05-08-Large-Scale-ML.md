@@ -92,6 +92,39 @@ Guarantees that an object within a distributed system is processed exactly once.
 #### Kafka Transactions
 - Uses unique transactional IDs for each producer tied to metadata to ensure that each data committed to the broker is complete -> Sometimes Kafka Streams API simplifies code
 ### Data Processing
+
+Given the example where we want to predict whether a user will cancel their subscription
+
+Where the data pipeline would look like
+Producers(Clickstream logs) -> Broker Cluster (Kafka) -> Consumer (HDFS Data Node)
+
+Message Processing would include
+- Aggregation
+    - counting how many searchers per user
+- Join
+    - Combining messages from separate click stream events
+- Transformations
+    - Nth month of the year instead of the date
+
+Requirements for this structure
+- Cluster resource management (CPU, RAM)
+- Computational dependency management (locality)
+- Manage saving final results to HDFS
+- Bonus: Share same HDFS cluster
+
+For this example we'll use Apache Spark and Apache Yarn installed on HDFS cluster
+
+The interaction between Spark and Yarn is that
+
+YARN AM ->  Spark Driver
+YARN containers <- Spark Executors
+
+Resource manger -> Node manager: AM -> Driver, Container-> Executor
+  |-> Node manager: Container-> Executor
+
+With this the single point of failure would be resource manager, so we could add zookeeper with an active/passive hot-standby
+
+
 #### Recommendation Carousel
 A component within a graphical or conversational user interface which presents recommendations to a user. This can include products, ads, and media content.
 ####  Central Processing Unit
@@ -103,17 +136,100 @@ When two or more computer programs are executed at the same instant across more 
 #### Random Access Memory
 A device on a computer which stores the data and machine code of a running computer program
 #### Apache Spark
-A software interface which provides implicit parallelism and fault tolerance across a cluster of machines
+A software interface which provides implicit parallelism and fault tolerance across a cluster of machines - Gives users ease of access to run code across cluster 
+- Driver
+    - Converts user's code to a set of tasks (unit of work)
+    - Schedules tasks across executors
+- Cluster Manager
+    - YARN schedules jobs submitted to cluster
+- Executor 
+    - Runs tasks
+    - Returns results to drivers
+
+Action Flow:
+Driver will receive a job
+Driver will
+- Verifies schema, types, data structures
+- Optimizes your code, with an 'optimized logical plan'
+    - Reduce code to RDD DAG (Resilient Distributed Dataset Direct Acyclic Graph)
+    - DAG Scheduler (stages)
+    - Task scheduler
+- Form physical plan
+    - Creates tasks and DAG schedulers, will then execute this plan with task schedulers
+    - Executors will return results to Driver
+
 #### Apache YARN
 A software product responsible for managing compute resources across a cluster of machines
+- A resource negotiator that 
+    - Scheduler allocates cluster resources
+    - Applications manager accepts jobs to be run on cluster
+- Node Manager (Per-node)
+    - Negotiates with Resource manager for resources requested by Application Master AM
+- Application Master
+    - Reports resource usage to resource manager
+    - Negotiates with the scheduler for containers
+- Containers
+    - Abstraction representing RAM CPU DISK
+Action flow:
+Client sends a task to resource manager
+Resource manager the starts a container an application master on the node manager
+Application master can ask for more resources from the resource manager
+Resource manager will tell the AM where free nodes resources are and starts those containers 
+Containers will run code
+To check in on the processes, you get status from AM
+After its done the AM will deregister with the RM 
+RM will clean up the resources that were deregistered
 #### Elastic MapReduce
 An Amazon Web Services product which provides users access to a Hadoop cluster
 #### Jupyter Notebook
 A project jupyter product which provides an interactive workspace to execute code.
 ### Processing Orchestration
+In an example where we want to get fresh data every 24hrs
+- Get interaction data from the search page and the carousel
+- Merge interaction data into one dataframe
+- Join interaction features with labels
+- Ideally not to do this manually
+- Handle data dependencies (serial, parallel)
+- Manage potentially thousands of scheduled jobs
+- We can here use Apache Airflow
 #### Apache Airflow
 A workflow management system that provides users a way to author, schedule and execute software
+- DAG Directed Acyclic graph
+get_data_A -\
+        join_AB ----\
+get_data_B -/       join_ABC
+        get_data_C -/
+Airflow offers
+- Webserver (Multiple instances behind load balancers)
+    - Flask app allows users to trigger DAGs
+    - Browse DAG history (stored in database)
+- Scheduler - Can be set with active/passive hot standby and support concurrency without can be single point of failure - also reduces duplications
+    - Monitors database to check task states
+    - Fetch DAGs from DAG store (S3 DFS)
+    - Send DAG tasks to execution queue (Could be RabbitMQ which can be scaled for availability)
+    - Writes DAG runs to database (Will have to active/passive hot standby as well) for history
+- Worker 
+    - Pulls the task queue
+    - Runs the tasks
+    - Stores task state to the database
+    - Implemented through celery worker
+        - If one of worker goes down, celery will reassign the work
 
+Action flow:
+User will trigger the DAG in the webserver
+Webserver fetc DAG from DAG store like S3
+Webserver will schedule the DAG with scheduler
+Scheduler enqueue Tasks in parallel to the Queue
+Works will constantly pull tasks to work on and write to database when complete
+Scheduler will periodically check if tasks are done
+This allows schedulers to then queue more jobs that were dependent on other jobs to get done
+When all tasks ae done then scheduler will add DAG History to the Database
+This allows webserver to getDAGStatus
+And webserver will relay to client DAG status
+- Check stats of DAG Run
+- Failures
+- Runtime
+- Can alter schedule
 ## Exploration
 ### Workspaces
 #### Automated Machine Learning
