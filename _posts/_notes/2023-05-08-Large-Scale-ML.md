@@ -230,8 +230,44 @@ And webserver will relay to client DAG status
 - Failures
 - Runtime
 - Can alter schedule
+
 ## Exploration
 ### Workspaces
+- Explore features, labels, and models
+    - Completeness of data
+        - Stability
+        - Availability
+        - Free of bias
+            - Positive feedback loop
+    - Pre-trained models
+        - Transfer learning
+            - Embedding layers
+    - Explainability
+        - Shapley values
+        - Lime
+        - Deeplift
+    - Model types
+        - Layered, ensemble, auto-ml
+    - Feature importance
+- Leverage team resources
+    - Team packages
+    - Collaboration
+- Environment management
+    - Individualized exploration
+    - Production-ready for serving predictions
+- Spark/HDFS access
+- Asynchronous support
+    - Training, hyperparameter tuning, evaluation
+- Data access governance
+    - Protected data
+
+Tools:
+- Jupyter hub / notebooks
+    - Amazon sagemaker studio
+    - Google collab
+    - Azure ML workspace
+
+
 #### Automated Machine Learning
 A strategy which automates the process of applying features and labels to a machine learning model
 #### Data Governance
