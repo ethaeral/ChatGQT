@@ -512,10 +512,81 @@ Tools:
 - Vowpal Wabbit (Contextual bandits)
 
 ### Impact Estimation
+Pre-experiment
+- How much will it cost?
+  - Time
+    - Minimum 2 weeks for the actual experiments
+    - From 2 weeks to 2 months support work
+      - Training data collection
+      - Model creation
+      - Experiment Infrastructure
+      - Model Hosting 
+      - Post-experiment analysis
+  - Headcount (MLExpert)
+    - 1 SWE
+    - 1 Data Engineer
+    - 1 Data Scientist
+  - Opportunity Cost
+    - Other non-ML projects
+    - Other ML projects
+  - Cost
+- How much will it benefit the company/customer?
+  - Pretend you build a perfect model, what does the results look like
+  - Then take 1%, 2%, 5%, 10% of that 'perfect' result 
+    - What would happen to 
+      - Revenue/Profit
+  - Compare those to the cost of experimentation
+    - 100k to run experiments
+    - 200k conservative from 250k potential upside
+  - Decide on point of diminished return
+  - What are the risks to the business?
+    - Loss of CTP, conversions, session time, customer familiarity, customer trust
+    - Data leakage
+      - If collecting confidential data is required for your experimental models
+    - Outages 
+      - Any new software components incur risk
+    - How quickly can we stop the experiment
+
+Post-Experiment
+- Is the experiment result valid?
+  - Bins correction
+    - Sample selection bins
+  - Extrapolation appropriate
+    - If done on holiday, payday, start of school
+    - compare to the same time last year adjusted for normal growth
+  - Statistically valid
+    - Frequentist A|B p-values
+    - Bayesian A|B probability B>A, expect loss
+    - MAB value remaining 
+  - Experiment collisions 
+    - Was another experiment being done
+      - Impacted the same user experience 
+      - Impacted the same metrics
+    - Carry over effects
+  - Is the new experience worth launching?
+    - Variants and invariants
+      - Did the variants you expected to change actually change?
+      - Did any invariant change?
+      - Do any change in variants contradict?
+    - Did customer service metrics change?
+      - Spikes can indicate confusion or dissatisfaction 
+    - Did any cannibalization occur?
+      - Pushing one product over another can have unforeseen implications to another
 
 #### Shadow Test
 
 Running two or more versions of software in parallel while only surfacing the result of one of the experiences to the end user. THis is done in an effort to gauge the difference between the software versions
+- Try to get some understanding of how new experiences behave
+
+Client -> Homepage -> GetRecommendation -> New Experience -> New logs
+              -> GetRecommendation -> Old Experience -> Old Logs
+
+- Use logs 
+  - Sanity check
+  - Measure differences
+  - Look for errors/faults
+  - CPU/Memory/Disk/Latency
+
 
 #### Sample Selection Bias
 
