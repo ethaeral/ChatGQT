@@ -434,16 +434,82 @@ A unique identifier assigned to a user to keep track of a user's connected inter
 A small piece of data stored by a browser which indicates stateful indicates stateful information for a particular website. For instance, a cookie can be stored in your browser after you log in to a website to indicate that you are logged in. This will stop subsequent pages from asking you to log in again.
 
 ### Bayesian AB Testing
+Similar as A/B testing but interpreting the results is different which is using bayes rule
+```P(H|D)=/frac{P(D|H)*P(PH)}{P(D)}```
+Main takeaway Posterior and Prior will be part of the same type of distribution
+- Goal is to know Probability of B being greater than A 
+  - Sample from A and B posterior and get the percentage of cases where B>A
+- Loss
+  - The result of choosing B over A if B is actually worse than A
+  - Sample the difference between A and B
+- Expected Loss
+  - Takes into account probability of B being greater than A
+  - As well, the loss if B is worse than A
+  - Same unit as metric
+  - Assuming B>A, if not: P(A>B)*Max(CTP_A-CTP_B,0)
+- Stopping criterion 
+  - If expected loss is less than some threshold, then stop
+  - Threshold should be something that you're comfortable losing or a don't care position
 
+Bayesian v Frequentist
+- Easier to interpret results
+- OFten fewer samples to reach launch decision which means faster experiments and improvements
+
+Tools
+- Visual web optimizer
 #### Beta Distribution
 
 This distribution is used to model percentages and proportions such as click-through probabilities
 
 ### Multi-Armed Bandit
+- Minimize the negative business impacts while still experimenting at a reasonable pace
 
+Explore/Exploit Trade off
+- We could explore the less promising treatment but miss a potentially better control
+- We could exploit the potentially better control but miss an eventually better treatment
+
+We could use Epsilon-greedy strategy - depending on which has a better response you can dynamically assign the partition on your group
+- How much better is this strategy over random allocation A|B testing
+
+Reward
+- The outcome of allocating a user to a particular experience
+- Total reward obtained by a MAB
+  - Sum of rewards obtained by allocating user u to arm a
+- Expected reward = Sum of Users average arm reward
+
+Regret
+- Reward obtained from optimal arm minus the reward obtain from the arm chosen
+- Expected regret = Sum of users optimal arm reward - Sum of Users average  arm reward
+- With epsilon-greedy we will have a fraction of regret
+
+![Expected Regret Comparison](image.png)
 #### Multi-Armed Bandit
-
+(Multi Arms are just different treatment groups)
 A process which provides a number of choices
+
+#### Thompson Sampling
+The frequency a user should be allocated to an experience should equal the probability of that experience being optimal
+- When to stop
+  - 95% chance that the value remaining in the experiment is less than 1%
+
+| MAB                                        | A\|B                                   |
+|--------------------------------------------|----------------------------------------|
+| Many Arms                                  | Few Arms                               |
+| Move Traffic automatically to the best arm | Good when results are needed long term |
+| Short term results                         | Focus on learning                      |
+| Focusing on optimizing                     | But higher regret                      |
+| but Longer experiment                      |                                        |
+
+Practical Considerations
+- How often to update beta distributions
+- How long customers actions take to record
+- Non-stationary user preferences
+- Can be contextual
+
+Tools:
+- Optimizely
+- Visual Web Optimizer
+- Vowpal Wabbit (Contextual bandits)
 
 ### Impact Estimation
 
