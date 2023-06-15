@@ -599,6 +599,24 @@ The event where one experiment unintentionally influences the results of the one
 ## Large-Scale Training
 
 ### Basic Models
+Spark cluster + HDFS helps create features and labels
+- We need to train models for exploration and likely automate training
+- Gradient Boosted Tree
+  - 100m Examples
+  - 200 features each
+  - Roughly 200 split points per feature
+  - Code flow:
+    - For ea. feature
+      - For ea. split point
+        - store_best
+    - Recurse_left
+    - Recurse_right
+- Random Forest
+  - Parallel operations 
+- Matrix Factorization
+  - Alternating Least Sq
+- Logistic Regression
+
 
 #### MLlib
 
