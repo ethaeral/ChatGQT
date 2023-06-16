@@ -733,6 +733,43 @@ GPUs are often used within deep learning to accelerate training of neural networ
 When two or computer programs share a single processor.
 
 ### Model Validation
+- Trained model needs to be tuned against a validation set by its hyper parameters 
+    - Running the model against the same techniques covered in the Model Training video
+    - THe trouble is finding the best hyper parameters efficiently
+It can cost to 100-1000 dollars to get one generation of the neural network
+To tune these model, we must find optimized hyper parameters as soon as possible
+- Naive way is to randomly search
+    - Learning rate
+        - Uniform (0.00001, 0.1)
+    - Batch size
+        - Uniform (10, 1000)
+    - Kernel Size 
+        - Uniform (3,11)
+
+Grid search can be better sometimes, it allows to select intervals that are meaningful
+Bayesian Optimization is better, chance of loss with 50% drop out using a distribution curve
+Each parameter will be given a distribution
+It will be flatten with upper and lower bound
+THe optimization would select a point and the bounds would collapse on the point
+Will pick a location with the most space between upper and lower bounds
+- This will approx. a true function with a 
+
+Expected Improvement
+- Represents the probability of an improvement as well as the size of the improvement
+- Takes into account the mean of the surrogate vs the minimum loss seen so far
+- Can be adjusted to explore more than exploit - test more of the upper bounds
+![Bayesian Optimization Hyperparameter tuning](image-1.png)
+Not parallelizable for the most part
+
+Tools:
+Hyperopt
+- Can work with spark
+AWS Sagemaker
+- Grid Search and Bayesian
+Google Vizier 
+
+
+
 
 #### Hyperparameters Optimization
 
