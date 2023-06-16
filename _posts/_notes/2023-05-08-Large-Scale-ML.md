@@ -648,14 +648,80 @@ A library provided by APache SPark which provides Spark clusters access to machi
 - One-hut encoding
 
 ### Deep Learning Models
+Representing computations of a DL model
+In one machine there will be RAM and CPU
+The ram would store mini batches of example
+CPU would fetch from RAM, then forward pass
+-> Which is done through matrix multiplication (can be used in back propagation)
+[x1,x2] * [w1,w2,w3] weights
+CPU can then use the Yhats to generate a gradient with loss function
+Then is then sent back to the ram
+When all batches are done - CPU adds up the Losses and its sent back to RAM to be used to weight update
+- Convolution can also be seen as a matrix multiplication
+    - Flatten out kernel matrix, then flatten subsection then multiply, you get the results of the convolution
+- Fully connected layer and the convolution are called operators
+- It's important in large-scale ML that the operators are highly optimized
+- Usually through concurrency
+
+Each CPU will have multiple cores that will handle more than one task at a time
+- CPUs are very fast to compute things but they have a low bandwidth
+    - With 100M training examples, ea, example take .1ms per example to compute with forward pass, back prop, and weight update
+    - One CPU - 4 cores min
+    - About 45 mins per epoch
+    - 10 epochs
+    - Ends up to be 7 hours in total without tuning
+- GPU is a peripheral component to the CPU machine
+    - Has streaming multiprocessors which has multiple cores
+    - GPUs are slower than CPUs processing
+CPU is faster
+GPU has a larger bandwidth
+-> Reduce 7hrs to 3secs
+
+CPU must being the coordinator and ends up being the bottle neck of the system
+
+To remove the CPU has the bottle neck we can arrange the CPU clusters into a cube where they have the ability to talk to each other 
+- NV link
+
+To fix the RAM constraints, it would be easier to expand horizontally and spread the data among several machines 
+
+After processing their partition of data then it would be sent to a single machine to aggregate the results so then we can update the weights 
+- either through ethernet or directly to memory through InfiniBand
+- issue is that a machine would go down
+
+The parameter server topology - Tensorflow, MXNet
+Another approach to work around this issue is to have a system design where there is one parameter server machine. Each worker machine would then pull some queue for 
+These worker machines will then shift back the gradient loss to the parameter to work on updating the weight
+This can be done asynchronously 
+- Downpour stochastic gradient descent
+
+Cons of this design, is that there will be stale parameters 
+- To mitigate this, systems implement a "barrier" -> which makes sure to synch machines if any machine falls behind
+- Can also compress data before sending
+
+If the model can't fit in the RAM/GPU then you
+- Have to partition the model through different machines
+- Machines would have to communicate to their neighboring machines to get forward passes and back propagations to work
+It would look like a neural network evenly split between four squares, or we can split the network through each layer of the network
+The layer split approach would have to use pipelining, where each examples would be passed through one by one
+
+Intermittent backups where clusters will back up their calculations
+
+Project Adam
+
+Decentralized topologies are options as well -> each section gets machine and then ea machine can communicate and each machine would have all the gradient losses and then they all can update their loss, which mitigates parameter staleness but it limited bandwidth is an issue
+
+Limited bandwidth can be helped by a process called ring reduce
+One value for each machine will be pushed to the next machine and then add and then send another number forward - when theres is one element left, they just send their values over and when its done, it will have a total gradient
 
 #### Model Parallelism
 
 A machine learning model training strategy used to maximize the utilization of compute resources in which the model is distributed across two or more devices
+- open multiprocessing, open MP
 
 #### Data Parallelism
 
 A machine learning model training strategy used to maximize the utilization of compute resources in which the model is distributed across two or more devices
+- Identically model and system design, but different data
 
 #### Graphic Processing Unit
 
