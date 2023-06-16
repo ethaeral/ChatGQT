@@ -601,6 +601,8 @@ The event where one experiment unintentionally influences the results of the one
 ### Basic Models
 Spark cluster + HDFS helps create features and labels
 - We need to train models for exploration and likely automate training
+
+Algo for large data sets:
 - Gradient Boosted Tree
   - 100m Examples
   - 200 features each
@@ -612,15 +614,38 @@ Spark cluster + HDFS helps create features and labels
     - Recurse_left
     - Recurse_right
 - Random Forest
-  - Parallel operations 
+  - Parallelize construction of each tree in the ensemble because no dependency like Gradient Boosted Tree would need to run computationally parallel
 - Matrix Factorization
   - Alternating Least Sq
+    - User embedded matrix * Product embedded matrix = original user product matrix 
+    - We can split these up into different machines
+      - Ordinary least q locking in on U
+      - Ea. machine work on partial results and communicate to talk to each other
 - Logistic Regression
+  - Spread the parameters across the cluster
+  - send mini batches to each machine 
+    - execute model on mini batch send back to a machine
+    - machine will aggregate these results together
+- Generally ML algorithms have variations which can use parallelization
+- This means a faster convergence to optimum parameter values
 
 
 #### MLlib
 
 A library provided by APache SPark which provides Spark clusters access to machine learning algorithms and related utilities. MLlib provides a Dataframe-based API which is unofficially referred to as SparkML
+- Has implemented parallel versions of a lot of models
+- Linear / Logistic regression
+- SVMs
+- GBT/RF
+- Naive Bayes
+- Collaborative Filtering
+- Biesecting K-Means
+- SVD/PCA
+- Feature standardization
+- TF-IDF
+- Feature Hashing
+- Stop word removal 
+- One-hut encoding
 
 ### Deep Learning Models
 
