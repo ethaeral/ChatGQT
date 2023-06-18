@@ -776,6 +776,55 @@ Google Vizier
 The process of searching for the best possible values of the hyperparameters of some machine learning model
 
 ## Productionization
+Reduce room for human error
+Places for Error:
+- Data/Model Exploration
+  - Workspaces
+  - Data Access
+    - Access to compute cluster as well for joins and aggregation
+  - Model Access
+    - Access to training infrastructure
+  - Collaboration
+- Experiment Design and Impact Estimation
+  - A|B testing
+  - MAB
+  - Experiment Tracking
+- Synchronize everything on deployment
+  - Model
+  - Data
+  - Environment
+
+Click stream
+- Automated tests with headless browsers
+Data processing jobs
+- Unit tests
+Human Validation
+- Version control
+- Code Review
+Data Storage
+- Validate Schemas
+- Consistency among the partition
+- Data is preserved
+- Can be tested and verified through click stream test
+Data Orchestration
+- Unit tests
+- Version control for DAGs
+
+To make sure all versions of dependencies are the same across all environments is using a requirements.txt
+Data must be versioned 
+S3, DVC
+Model parameter tracking, hyper parameters and performance
+Tools that do both data and model management
+- ML Flow, ML Metadata, SageMaker Studio
+
+Productionize for an experiment
+- Track experiment
+  - Who is the experiment affecting
+  - In what way they're being affected
+  - Where it's affecting them
+  - How long will it affect them
+To avoid experiment collisions
+
 
 ### Productionization
 
@@ -790,6 +839,28 @@ The number of true positives divided by the true positives plus false positives.
 ## Hosting
 
 ### Data Hosting
+Client -> App ->  Recommendation Service
+
+- Get the user's features to run through the model
+  - But where are they?
+    - THey could be no where, cold start problem
+    - They're in HDFS
+- HDFS isn't exactly ideal for hosting data in low-latency situations
+- It's probably a better idea to offer a low-latency data serving layer
+  - Airflow, recognize HDFS is updated, then a hook will refetch data from HDFS and get async get bulk data, and it would be available
+    - Assuming data fits on host or RAM 
+      - Redis, Memcached Toran tool
+      - We now how to worry about two vertical scaling
+      - We can horizontally scale 
+        - But its not great, can used distributed cache cluster
+        - Each service machine need a client -> small cache for popular items
+        - Need Zookeeper -> reduce error of calling machines not on in the cluster
+        - Tools:
+          - Apache Ignite
+          - DynamoDB DAX
+          - Redis Elasticache
+
+
 
 #### In-memory Database
 
