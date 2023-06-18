@@ -871,7 +871,51 @@ A database which relies either solely or primarily on the RAM of a computer
 A cache which distributed across two or more machines
 
 ### Model Hosting
+- Fetch features, often both user and item
+- Alter the features in the most cases
+  - Append the user/item features
+  - Append online features
+    - Device
+    - Country
+    - Referrer 
+- Perform the inference
+- Map inference to meaningful result
+  - From array of probabilities per item to recommend item
+- All of these were performed in exploration and now for inference needs to be repeated exactly (trained/validated)
 
+- Spark Pipeline
+  - Lib which allows you to create a DAG of stages required to go from hosted features to usable predictions
+
+- Latency Issues
+  - Amazon found that an extra 100ms of latency created a 1% loss of revenue
+  - Google found an extra .5 seconds load time causes a 20% traffic drop
+  - Using ML inference is on the critical path of rendering the homepage, latency is a large concern
+  - We cant parallelize fetching the features and running them through the model
+  - Local inferences vs Remote inference
+  - Local -> latency will be low
+    - Issue is that lang used in system might be diff from python, but py formats can be read by diff languages in low latency PMML 
+    - Would have to deploy to service
+  - Remote -> Dedicated inference server
+    - Language agnostic
+    - Deployment not tied together
+    - Specialized hardware requirements
+  - Language optimization
+    - C++ is 10x-100x faster
+    - Java is 10x-50x faster
+    - Use NUMBA
+      - Numba compiles the python code down to machine code
+      - Can approach latencies comparable to C and FORTRAN
+  - Hardware
+    - Generally CPU over GPU, because CPU will be faster
+  - Low-latency fallbacks and circuit breakers
+    - If something takes too long
+      - Return user low latency recommendations
+    - If something goes down
+      - Falling back to default experiences, until services can come back online
+- Batch inferences, we can store distributed cache
+  - No online features
+  - Inference space is small enough
+  
 #### Numba
 
 A just-in-time Python complier which resolves a subset of the python programming language down to machine code
