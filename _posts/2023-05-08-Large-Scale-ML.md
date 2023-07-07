@@ -648,14 +648,80 @@ A library provided by APache SPark which provides Spark clusters access to machi
 - One-hut encoding
 
 ### Deep Learning Models
+Representing computations of a DL model
+In one machine there will be RAM and CPU
+The ram would store mini batches of example
+CPU would fetch from RAM, then forward pass
+-> Which is done through matrix multiplication (can be used in back propagation)
+[x1,x2] * [w1,w2,w3] weights
+CPU can then use the Yhats to generate a gradient with loss function
+Then is then sent back to the ram
+When all batches are done - CPU adds up the Losses and its sent back to RAM to be used to weight update
+- Convolution can also be seen as a matrix multiplication
+    - Flatten out kernel matrix, then flatten subsection then multiply, you get the results of the convolution
+- Fully connected layer and the convolution are called operators
+- It's important in large-scale ML that the operators are highly optimized
+- Usually through concurrency
+
+Each CPU will have multiple cores that will handle more than one task at a time
+- CPUs are very fast to compute things but they have a low bandwidth
+    - With 100M training examples, ea, example take .1ms per example to compute with forward pass, back prop, and weight update
+    - One CPU - 4 cores min
+    - About 45 mins per epoch
+    - 10 epochs
+    - Ends up to be 7 hours in total without tuning
+- GPU is a peripheral component to the CPU machine
+    - Has streaming multiprocessors which has multiple cores
+    - GPUs are slower than CPUs processing
+CPU is faster
+GPU has a larger bandwidth
+-> Reduce 7hrs to 3secs
+
+CPU must being the coordinator and ends up being the bottle neck of the system
+
+To remove the CPU has the bottle neck we can arrange the CPU clusters into a cube where they have the ability to talk to each other 
+- NV link
+
+To fix the RAM constraints, it would be easier to expand horizontally and spread the data among several machines 
+
+After processing their partition of data then it would be sent to a single machine to aggregate the results so then we can update the weights 
+- either through ethernet or directly to memory through InfiniBand
+- issue is that a machine would go down
+
+The parameter server topology - Tensorflow, MXNet
+Another approach to work around this issue is to have a system design where there is one parameter server machine. Each worker machine would then pull some queue for 
+These worker machines will then shift back the gradient loss to the parameter to work on updating the weight
+This can be done asynchronously 
+- Downpour stochastic gradient descent
+
+Cons of this design, is that there will be stale parameters 
+- To mitigate this, systems implement a "barrier" -> which makes sure to synch machines if any machine falls behind
+- Can also compress data before sending
+
+If the model can't fit in the RAM/GPU then you
+- Have to partition the model through different machines
+- Machines would have to communicate to their neighboring machines to get forward passes and back propagations to work
+It would look like a neural network evenly split between four squares, or we can split the network through each layer of the network
+The layer split approach would have to use pipelining, where each examples would be passed through one by one
+
+Intermittent backups where clusters will back up their calculations
+
+Project Adam
+
+Decentralized topologies are options as well -> each section gets machine and then ea machine can communicate and each machine would have all the gradient losses and then they all can update their loss, which mitigates parameter staleness but it limited bandwidth is an issue
+
+Limited bandwidth can be helped by a process called ring reduce
+One value for each machine will be pushed to the next machine and then add and then send another number forward - when theres is one element left, they just send their values over and when its done, it will have a total gradient
 
 #### Model Parallelism
 
 A machine learning model training strategy used to maximize the utilization of compute resources in which the model is distributed across two or more devices
+- open multiprocessing, open MP
 
 #### Data Parallelism
 
 A machine learning model training strategy used to maximize the utilization of compute resources in which the model is distributed across two or more devices
+- Identically model and system design, but different data
 
 #### Graphic Processing Unit
 
@@ -667,12 +733,98 @@ GPUs are often used within deep learning to accelerate training of neural networ
 When two or computer programs share a single processor.
 
 ### Model Validation
+- Trained model needs to be tuned against a validation set by its hyper parameters 
+    - Running the model against the same techniques covered in the Model Training video
+    - THe trouble is finding the best hyper parameters efficiently
+It can cost to 100-1000 dollars to get one generation of the neural network
+To tune these model, we must find optimized hyper parameters as soon as possible
+- Naive way is to randomly search
+    - Learning rate
+        - Uniform (0.00001, 0.1)
+    - Batch size
+        - Uniform (10, 1000)
+    - Kernel Size 
+        - Uniform (3,11)
+
+Grid search can be better sometimes, it allows to select intervals that are meaningful
+Bayesian Optimization is better, chance of loss with 50% drop out using a distribution curve
+Each parameter will be given a distribution
+It will be flatten with upper and lower bound
+THe optimization would select a point and the bounds would collapse on the point
+Will pick a location with the most space between upper and lower bounds
+- This will approx. a true function with a 
+
+Expected Improvement
+- Represents the probability of an improvement as well as the size of the improvement
+- Takes into account the mean of the surrogate vs the minimum loss seen so far
+- Can be adjusted to explore more than exploit - test more of the upper bounds
+![Bayesian Optimization Hyperparameter tuning](image-1.png)
+Not parallelizable for the most part
+
+Tools:
+Hyperopt
+- Can work with spark
+AWS Sagemaker
+- Grid Search and Bayesian
+Google Vizier 
+
+
+
 
 #### Hyperparameters Optimization
 
 The process of searching for the best possible values of the hyperparameters of some machine learning model
 
 ## Productionization
+Reduce room for human error
+Places for Error:
+- Data/Model Exploration
+  - Workspaces
+  - Data Access
+    - Access to compute cluster as well for joins and aggregation
+  - Model Access
+    - Access to training infrastructure
+  - Collaboration
+- Experiment Design and Impact Estimation
+  - A|B testing
+  - MAB
+  - Experiment Tracking
+- Synchronize everything on deployment
+  - Model
+  - Data
+  - Environment
+
+Click stream
+- Automated tests with headless browsers
+Data processing jobs
+- Unit tests
+Human Validation
+- Version control
+- Code Review
+Data Storage
+- Validate Schemas
+- Consistency among the partition
+- Data is preserved
+- Can be tested and verified through click stream test
+Data Orchestration
+- Unit tests
+- Version control for DAGs
+
+To make sure all versions of dependencies are the same across all environments is using a requirements.txt
+Data must be versioned 
+S3, DVC
+Model parameter tracking, hyper parameters and performance
+Tools that do both data and model management
+- ML Flow, ML Metadata, SageMaker Studio
+
+Productionize for an experiment
+- Track experiment
+  - Who is the experiment affecting
+  - In what way they're being affected
+  - Where it's affecting them
+  - How long will it affect them
+To avoid experiment collisions
+
 
 ### Productionization
 Reduce room for human error
@@ -688,6 +840,28 @@ The number of true positives divided by the true positives plus false positives.
 ## Hosting
 
 ### Data Hosting
+Client -> App ->  Recommendation Service
+
+- Get the user's features to run through the model
+  - But where are they?
+    - THey could be no where, cold start problem
+    - They're in HDFS
+- HDFS isn't exactly ideal for hosting data in low-latency situations
+- It's probably a better idea to offer a low-latency data serving layer
+  - Airflow, recognize HDFS is updated, then a hook will refetch data from HDFS and get async get bulk data, and it would be available
+    - Assuming data fits on host or RAM 
+      - Redis, Memcached Toran tool
+      - We now how to worry about two vertical scaling
+      - We can horizontally scale 
+        - But its not great, can used distributed cache cluster
+        - Each service machine need a client -> small cache for popular items
+        - Need Zookeeper -> reduce error of calling machines not on in the cluster
+        - Tools:
+          - Apache Ignite
+          - DynamoDB DAX
+          - Redis Elasticache
+
+
 
 #### In-memory Database
 
@@ -698,7 +872,51 @@ A database which relies either solely or primarily on the RAM of a computer
 A cache which distributed across two or more machines
 
 ### Model Hosting
+- Fetch features, often both user and item
+- Alter the features in the most cases
+  - Append the user/item features
+  - Append online features
+    - Device
+    - Country
+    - Referrer 
+- Perform the inference
+- Map inference to meaningful result
+  - From array of probabilities per item to recommend item
+- All of these were performed in exploration and now for inference needs to be repeated exactly (trained/validated)
 
+- Spark Pipeline
+  - Lib which allows you to create a DAG of stages required to go from hosted features to usable predictions
+
+- Latency Issues
+  - Amazon found that an extra 100ms of latency created a 1% loss of revenue
+  - Google found an extra .5 seconds load time causes a 20% traffic drop
+  - Using ML inference is on the critical path of rendering the homepage, latency is a large concern
+  - We cant parallelize fetching the features and running them through the model
+  - Local inferences vs Remote inference
+  - Local -> latency will be low
+    - Issue is that lang used in system might be diff from python, but py formats can be read by diff languages in low latency PMML 
+    - Would have to deploy to service
+  - Remote -> Dedicated inference server
+    - Language agnostic
+    - Deployment not tied together
+    - Specialized hardware requirements
+  - Language optimization
+    - C++ is 10x-100x faster
+    - Java is 10x-50x faster
+    - Use NUMBA
+      - Numba compiles the python code down to machine code
+      - Can approach latencies comparable to C and FORTRAN
+  - Hardware
+    - Generally CPU over GPU, because CPU will be faster
+  - Low-latency fallbacks and circuit breakers
+    - If something takes too long
+      - Return user low latency recommendations
+    - If something goes down
+      - Falling back to default experiences, until services can come back online
+- Batch inferences, we can store distributed cache
+  - No online features
+  - Inference space is small enough
+  
 #### Numba
 
 A just-in-time Python complier which resolves a subset of the python programming language down to machine code
