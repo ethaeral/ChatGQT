@@ -1,6 +1,6 @@
 ---
 title: Large Scale Machine Learning Notes
-date: 2023-04-17 00:00:00 -0500
+date: 2023-05-08 00:00:00 -0500
 categories: [Core]
 tags: [forme, interview prep, notes]
 ---
