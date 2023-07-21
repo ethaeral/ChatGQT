@@ -555,8 +555,9 @@ p(res.summary())
 
   
 Resources:
-[] (What is Time Series Forecasting)[https://machinelearningmastery.com/time-series-forecasting/]  
-[] (A Gentle Introduction to Autocorrelation and Partial Autocorrelation)[https://machinelearningmastery.com/gentle-introduction-autocorrelation-partial-autocorrelation/]  
-[] (Time Series Analysis)[https://www.blackarbs.com/blog/time-series-analysis-in-python-linear-models-to-garch/11/1/2016]   
+[x] (What is Time Series Forecasting)[https://machinelearningmastery.com/time-series-forecasting/]  
+[x] (A Gentle Introduction to Autocorrelation and Partial Autocorrelation)[https://machinelearningmastery.com/gentle-introduction-autocorrelation-partial-autocorrelation/]  
+[x] (Time Series Analysis)[https://www.blackarbs.com/blog/time-series-analysis-in-python-linear-models-to-garch/11/1/2016] 
+[] (TSA)[https://www.quantstart.com/articles/#time-series-analysis]   
 [] (Comprehensive Guide To Time Series Forecast)[https://www.analyticsvidhya.com/blog/2016/02/time-series-forecasting-codes-python/]  
 [] (ARIMA Model)[https://www.machinelearningplus.com/time-series/arima-model-time-series-forecasting-python/]     
