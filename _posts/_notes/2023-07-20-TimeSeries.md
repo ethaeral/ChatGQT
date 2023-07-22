@@ -5,12 +5,27 @@ categories: [Core, Machine Learning]
 tags: [forme, notes]
 math: true
 ---
+TODO:
+Covariance
+Lambda
 
 ## Time Series and Forecasting
 
 A sequence of measurements on the same variable over time made over regular intervals. Use of these sequences to create statistical model to predict future values. Forecasting is different from prediction because forecasting is dependent on sequential time related data.
 
 Extrapolation is the process of inferring values outside the range of the existing data to make predictions. Extrapolation is one of the essential methods that data scientists use to predict future trends and outcomes.
+
+Stochastic Process is a set or collection of random variables, where the set is ordered and corresponds to the moment of time.
+
+Time Series data is  
+- Dependent
+- Could be simple or complicated dependence
+- Memory can be high
+- Memory is typically unknown
+
+The variation in the data can be due to time-varying average trends
+- Linear, quadratic - deterministic
+- Periodic - seasonal
 
 ### Components of a Time Series
 
@@ -50,8 +65,18 @@ Time Series often requires cleaning, scaling, and transformations
 
 - When time series have a random process, where unconditional join probability distribution does not change with time
 - A stationary time series has a constant variance that will return to the long term mean in n time stamps
-- Has property of homoscedasticity - were the spread of data remains approximately the 
+    - $\mu_{t}= E(x_{t})$
+- Has property of homoscedasticity / shift-invariance - were the spread of data remains approximately the 
 - Covariance is approximate constant
+
+Autocovariance: defined as covariance between the random two sequential random vairable or defined as covariance between the same time series at different time periods
+$$R_{x}(t_{1},t_{2})= E((x_{t_{1}}-\mu_{t_{1}})(x_{t_{2}}-\mu_{t_{2}}) $$
+
+Wide Sense Stationarity conditions  
+- Should have same mean at all time points
+- Covariance should be the same
+$$E(x_{t})=\mu_{t}$$
+$$R_{x}(t_{1},t_{2}) = R_{x}(t_{1}-t_{2}) = R_{x}(t_{2}-t_{1})$$
 
 ### Why do we convert a Non-Stationary Time Series to Stationary?
 
@@ -65,7 +90,15 @@ Most models in TSA assume covariance-stationarity, and TS relies on stationarity
 2. Data points will always return towards long run mean with a constant variance
    - We can also use Augmented Dickey-Fuller ADF test to check
 
+Testing Stationarity
+- Sample mean for each $\lambda$ to check if its approx. constant
+    - $\hat{\mu} = \frac{1}{N-\lambda}\sum_{i=\lambda}^{N-1}X_{i}$
+- Computer sample autocovarianace for each \lambda to also check for approx constant
+    - $\hat{R}_{\tau} = \frac{1}{N-\lambda}\sum_{i=\lambda}^{N-1}(X_{i}-\hat{\mu})(X_{i+\tau}-\hat{\mu})$
+
 ### How to Make a Time Series Stationary
+
+Detrending is the process of removing trend from non-stationary TS
 
 Most common method is by differencing the series, until it becomes approximately stationary.  
 $$ Y*{t}-Y*{t-1} $$  
@@ -87,6 +120,7 @@ For a time series to be categorized as White Noise:
 1. The mean value should be zero
 2. The standard deviation should be constant, it shouldn't change over time
 3. There must be zero auto correlation at all lags
+4. Autocovaraince between two random variables must equal zero
 
 Methods for determining if time series resembles White Noise:
 
@@ -537,6 +571,12 @@ p(res.summary())
 ### Serial Correlation
 - When residuals errors of TS models are correlated to each other
 - Stationarity TS are serially uncorrelated, if there is correlation there type 1 errors will occur
+### Order Estimation
+1. Divide the data, build multiple models with different orders and compare their error
+2. Adding penalty to the model's complexity. Models are scored both on their performance on the training dataset and based on the complexity of of the model.
+    - Model performance: How well a candidate model has performed  on the the training dataset?
+    - How complicated the trained candidate model is after training
+Some techniques are AIC, Akaike Information Criterion and MDL, Minimum Description Length
 ### Auto Correlation Function (ACF) and Serial Correlation
 - ACF plot is a bar chart of coefficients of correlation between the time series and lagged values
 - Given $y$ is value and $t$ is time, then the correlation between $y^(t)$ and $y^(t-1)$ is lag
