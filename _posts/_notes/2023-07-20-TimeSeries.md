@@ -558,6 +558,38 @@ Resources:
 [x] (What is Time Series Forecasting)[https://machinelearningmastery.com/time-series-forecasting/]  
 [x] (A Gentle Introduction to Autocorrelation and Partial Autocorrelation)[https://machinelearningmastery.com/gentle-introduction-autocorrelation-partial-autocorrelation/]  
 [x] (Time Series Analysis)[https://www.blackarbs.com/blog/time-series-analysis-in-python-linear-models-to-garch/11/1/2016] 
-[] (TSA)[https://www.quantstart.com/articles/#time-series-analysis]   
-[] (Comprehensive Guide To Time Series Forecast)[https://www.analyticsvidhya.com/blog/2016/02/time-series-forecasting-codes-python/]  
+[x] (TSA)[https://www.quantstart.com/articles/#time-series-analysis]   
+[x] (Comprehensive Guide To Time Series Forecast)[https://www.analyticsvidhya.com/blog/2016/02/time-series-forecasting-codes-python/]  
 [] (ARIMA Model)[https://www.machinelearningplus.com/time-series/arima-model-time-series-forecasting-python/]     
+
+## Glossary Notation
+$x$ = Random Variable  
+$x_{t}$ = Random Variable at time t  
+$h$ = Lag value  
+$\forall$ = Indicates "for all"  
+$E(X_{t})$ = Expected value of Stochastic process X  
+$\mu$ = Mean of Stochastic process is constant value  
+$t_{1}, t_{2}= t_{1} and t_{2}$ = are the two different timestamps  
+$\sum$ = Summation  
+$R_{x}(t_{1},t_{2})$ = AutoCovariance  
+$\lambda$ = Window size of the time series, the number of data points which we choose  
+$N$ = The total number of samples  
+$\hat{\mu}$ = The summation of X values ranging from lambda to N - 1 divided by the subtraction of total number of samples and lambda  
+$\tau = t_{1}-t_{2}$ = difference between the past value and the present value  
+$\hat{R}_{x}(\tau)$ = Sample autocovariance for each lambda  
+$S_{t}$ = Seasonal Component of the time series  
+$k$ = Seasonality period  
+$y_{t}$ = Sequence of random variables  
+$\hat{Y_{t}}$ = Time series after applying smoothing (removing the fine-grained variation between time stamps)  
+$y_{h}$ = The periodic regression coefficient of $S_{t+h}$ in order to remove seasonality from the data  
+$w_{t}$ = White Noise  
+$\sigma^{2}$ = Variance  
+$\delta_{t1-t2}$ = Delta change in time  
+$p$ = The number of past orders to be included in the Auto Regressive AR model
+$a_{i}$ = Coefficients of hte Auto Regressive model  
+$z$ = Variable of the polynomial  
+$b_{i}$ = Coefficients of the Moving Average model  
+$q$ = The order of the Moving Average model  
+$x_{t}-X_{t-1}$ = First Order differencing  
+$A(z)=A(z)$ = is a matrix where each row acts as a regressor   
+$|| ||$ = Denotes the norm of a vector    
