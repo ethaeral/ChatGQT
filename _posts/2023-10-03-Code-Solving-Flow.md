@@ -68,22 +68,4 @@ A Problem Solving Flow
     - Other special case
 
 
-1. [Listen](#listen)
-    - Consider all problem information for an optimal algorithm
-2. [Example](#example)
-    - Check examples if they are a special case or if they are too small
-3. [Brute Force](#brute-force)
-    - State naive algorithm with runtime and list possible optimization
-4. [Optimize](#optimize)
-    - Work through BUD (Bottlenecks, Unnecessary Work, Duplicated Work) optimization
-    - Solve manually, reverser engineer it, how did you solve it
-    - Make a time vs space tradeoff
-5. [Walk Through](#walk-through)
-    - Walk through your approach in detail before coding - white boarding
-6. [Implement](#implement)
-    - Psuedo code -> Beautiful Modular Code
-7. [Test](#test)
-    - Unusual or nonstandard code
-    - Hot spots 
-    - Small, special, edge test cases
 
