@@ -64,3 +64,4 @@ Think of possible solutions for ea. scenario
     - Per CPU core / thread 
 - Time constraints -> Batch / Chunking / Parallel processing 
 ```
+
