@@ -89,32 +89,34 @@ A Problem Solving Flow
     - Just list all data structures and list pros and cons
 
 ## Customized Flow
-Pre Dev Cycle:
+Setup Before All:
 - Break down problem todos, constraints, unique information, problem type?
 - How would you do this if this was a real world situation?
 
-Intial Pass (Brute Force Algortihm)
+Describe (Brute Force Algortihm)
 - Test **
     - General: input big enough, not a special case
     - Special: Null, single ele, extreme cases, etc
-- Walk
-    - Deconstruct solution and explain step by step
+- Expect
+    - Explain the solution
     - State time and space complexity
-- Run (Code)
+    - Deconstruct the solution step by step
+- It (Code)
     - Modularized
     - Error checked
     - Classes and structs when appropriate
     - Good variables
     - Make comments of places where it needs refractoring
-- Bud
-    - Bottleneck, unnecessary work, duplicated work
+- ToBe
+    - With no bottlenecks, unnecessary work, duplicated work
 - Bloom (Optimize) **
-    - Check if all info has been used
-    - Data structure brainstorm with pros and cons
-    - State time opt and space opt solution
-    - State BCR
+    - Is this the desired outcome if not:
+        - Check if all info has been used
+        - Data structure brainstorm with pros and cons
+        - State time opt and space opt solution
+        - State BCR 
 
-Next Pass (Optimized Algorithm)
+Describe (Optimized Algorithm)
 - Test **
     - More general input tests
     - Conceptual tests
@@ -123,22 +125,24 @@ Next Pass (Optimized Algorithm)
         - Interger division
         - Null node in binary tree
         - Start and end of iterations
-- Walk
-    - Deconstruct solution and explain step by step
+- Expect
+    - Explain the solution
     - State time and space complexity
-- Run (Code)
+    - Deconstruct the solution step by step
+- It (Code)
     - Modularized
     - Error checked
     - Classes and structs when appropriate
     - Good variables
     - Make comments of places where it needs refractoring
-- Bud 
-    - Bottleneck, unnecessary work, duplicated work
-- Bloom (Optimize) **
-    - Check if all info has been used
-    - Check if there's more that can be optimized
+- ToBe 
+    - With no bottleneck, unnecessary work, duplicated work
+- Output (Optimize) **
+    - Is this the desired outcome if not:
+        - Check if all info has been used
+        - Check if there's more that can be optimized
 
-Post Dev Cycle:
+Break down After all:
 - Further testing 
     - Look for weird spaces
     - Hot spots
