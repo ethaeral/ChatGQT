@@ -67,60 +67,6 @@ A Problem Solving Flow
     - Extreme cases
     - Other special case
 
-## Custom Solve Flow
-1. Break down question and note unique information
-    - State how you'd do it manually in real life if possible
-    - State the most simplify and generalized version of the problem
-2. Create intial test cases
-    - General
-        - Input sufficently large
-        - Not a special case
-    - Special test cases
-        - Null
-        - Single element values
-        - Extreme cases
-        - Other specialcases
-3. Walk through brute force algo
-    - State the time and space complexity
-    - State BUD 
-        - Bottlenecks
-            - Part of algo that slows down overall runtime
-                - One time work that slows down
-                - Chuck of work that is down repeatedly
-        - Unnecessary Work
-            - Breaking out of loops early
-        - Duplicated Work
-            - Create hashing to for the same work
-4. Optimize
-    - Check for unused info
-    - Make time vs space trade offs
-        - State best solution for time opt and space opt
-            - State pros and cons to each 
-    - State best concievable run time
-    - Common optimizations:
-    - Pre compute info -> hashtables
-5. Walk through optimized algo
-    - Data structure brainstorm
-    - Make sure to have a step by step plain english what will happen
-    - Deconstruct your solution (reverse engineer it)
-6. Implement
-    - Write beautiful code
-        - Modularized
-        - Error checked
-        - Use classes and structs when appropriate
-        - Good variable names
-        - If you need to refractor use comments
-7. Create more tests
-    - More general input tests
-    - Conceptual tests -> explain your code
-    - Look for weird spaces
-    - Hot spots
-        - Base cases
-        - Interger division
-        - Null node in binary tree
-        - Start and end of interations through linked list
-8. Work through BUD again
-
 ## Optimization Techniques
 1. BUD 
     - Bottlenecks
@@ -141,3 +87,59 @@ A Problem Solving Flow
     - Solve the problem for the base case then build to more special cases
 4. Data Structure Brainstorm
     - Just list all data structures and list pros and cons
+
+## Customized Flow
+Pre Dev Cycle:
+- Break down problem todos, constraints, unique information, problem type?
+- How would you do this if this was a real world situation?
+
+Intial Pass (Brute Force Algortihm)
+- Test **
+    - General: input big enough, not a special case
+    - Special: Null, single ele, extreme cases, etc
+- Walk
+    - Deconstruct solution and explain step by step
+    - State time and space complexity
+- Run (Code)
+    - Modularized
+    - Error checked
+    - Classes and structs when appropriate
+    - Good variables
+    - Make comments of places where it needs refractoring
+- Bud
+    - Bottleneck, unnecessary work, duplicated work
+- Bloom (Optimize) **
+    - Check if all info has been used
+    - Data structure brainstorm with pros and cons
+    - State time opt and space opt solution
+    - State BCR
+
+Next Pass (Optimized Algorithm)
+- Test **
+    - More general input tests
+    - Conceptual tests
+    - Hot spots
+        - Base cases
+        - Interger division
+        - Null node in binary tree
+        - Start and end of iterations
+- Walk
+    - Deconstruct solution and explain step by step
+    - State time and space complexity
+- Run (Code)
+    - Modularized
+    - Error checked
+    - Classes and structs when appropriate
+    - Good variables
+    - Make comments of places where it needs refractoring
+- Bud 
+    - Bottleneck, unnecessary work, duplicated work
+- Bloom (Optimize) **
+    - Check if all info has been used
+    - Check if there's more that can be optimized
+
+Post Dev Cycle:
+- Further testing 
+    - Look for weird spaces
+    - Hot spots
+
