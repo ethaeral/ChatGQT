@@ -92,7 +92,7 @@ A Problem Solving Flow
 Setup Before All:
 - Break down problem todos, constraints, unique information, problem type?
 
-- Describe (Brute Force Algortihm)
+- Describe (Brute Force Solution)
     - Naive Solution that is close to BCR
         - How would you do this if this was a real world situation?
         - What is the base problem?
@@ -116,7 +116,7 @@ Setup Before All:
     - With no bottlenecks, unnecessary work, duplicated work
     - Check if close to BCR
 
-- Describe (Optimized Algorithm)
+- Describe (Optimized Solution)
     - Optimized Algorithm that is close to BCR
         - Pick data structure brainstorm with pros and cons
         - State time opt and space opt solution
