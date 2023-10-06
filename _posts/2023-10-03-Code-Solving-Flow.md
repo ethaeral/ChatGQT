@@ -148,4 +148,11 @@ Break down After all:
     - Hot spots
 - Further optimization
     - Check if all info has been used
-    - Check if there's more that can be optimized
+    - Check if there's more that can be optimized as is
+    - Beyond this code optimization:
+        - Memory constraint
+            - Consider streaming
+        - CPU constraint
+            - Consider threading
+        - Time constraint
+            - Consider batching, chunking, and parallel processing
