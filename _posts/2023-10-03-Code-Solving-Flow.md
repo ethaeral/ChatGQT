@@ -91,10 +91,15 @@ A Problem Solving Flow
 ## Customized Flow
 Setup Before All:
 - Break down problem todos, constraints, unique information, problem type?
-- How would you do this if this was a real world situation?
 
-Describe (Brute Force Algortihm)
+- Describe (Brute Force Algortihm)
+    - Naive Solution that is close to BCR
+        - How would you do this if this was a real world situation?
+        - What is the base problem?
+            - Generalize and simplify
+            - Build from the base
 - Test **
+    - Check if all info has been used
     - General: input big enough, not a special case
     - Special: Null, single ele, extreme cases, etc
 - Expect
@@ -109,15 +114,14 @@ Describe (Brute Force Algortihm)
     - Make comments of places where it needs refractoring
 - ToBe
     - With no bottlenecks, unnecessary work, duplicated work
-- Bloom (Optimize) **
-    - Is this the desired outcome if not:
-        - Check if all info has been used
-        - Data structure brainstorm with pros and cons
-        - State time opt and space opt solution
-        - State BCR 
+    - Check if close to BCR
 
-Describe (Optimized Algorithm)
+- Describe (Optimized Algorithm)
+    - Optimized Algorithm that is close to BCR
+        - Pick data structure brainstorm with pros and cons
+        - State time opt and space opt solution
 - Test **
+    - Check if all info has been used
     - More general input tests
     - Conceptual tests
     - Hot spots
@@ -137,13 +141,11 @@ Describe (Optimized Algorithm)
     - Make comments of places where it needs refractoring
 - ToBe 
     - With no bottleneck, unnecessary work, duplicated work
-- Output (Optimize) **
-    - Is this the desired outcome if not:
-        - Check if all info has been used
-        - Check if there's more that can be optimized
 
 Break down After all:
 - Further testing 
     - Look for weird spaces
     - Hot spots
-
+- Further optimization
+    - Check if all info has been used
+    - Check if there's more that can be optimized
