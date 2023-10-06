@@ -67,5 +67,43 @@ A Problem Solving Flow
     - Extreme cases
     - Other special case
 
+1. Break down question and note unique information
+2. Create intial test cases
+    - General
+        - Input sufficently large
+        - Not a special case
+    - Special test cases
+        - Null
+        - Single element values
+        - Extreme cases
+        - Other specialcases
+3. Walk through brute force algo
+    - State the time and space complexity
+4. Optimize
+    - Check for unused info
+    - Make time vs space trade offs
+        - State best solution for time opt and space opt
+            - State pros and cons to each 
+    - State best concievable run time
+    - Common optimizations:
+    - Pre compute info -> hashtables
+5. Walk through optimized algo
+    - Make sure to have a step by step plain english what will happen
+6. Implement
+    - Write beautiful code
+        - Modularized
+        - Error checked
+        - Use classes and structs when appropriate
+        - Good variable names
+        - If you need to refractor use comments
+7. Create more tests
+    - More general input tests
+    - Conceptual tests -> explain your code
+    - Look for weird spaces
+    - Hot spots
+        - Base cases
+        - Interger division
+        - Null node in binary tree
+        - Start and end of interations through linked list
 
 
