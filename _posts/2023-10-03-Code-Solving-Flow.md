@@ -67,7 +67,10 @@ A Problem Solving Flow
     - Extreme cases
     - Other special case
 
+## Custom Solve Flow
 1. Break down question and note unique information
+    - State how you'd do it manually in real life if possible
+    - State the most simplify and generalized version of the problem
 2. Create intial test cases
     - General
         - Input sufficently large
@@ -79,6 +82,15 @@ A Problem Solving Flow
         - Other specialcases
 3. Walk through brute force algo
     - State the time and space complexity
+    - State BUD 
+        - Bottlenecks
+            - Part of algo that slows down overall runtime
+                - One time work that slows down
+                - Chuck of work that is down repeatedly
+        - Unnecessary Work
+            - Breaking out of loops early
+        - Duplicated Work
+            - Create hashing to for the same work
 4. Optimize
     - Check for unused info
     - Make time vs space trade offs
@@ -88,7 +100,9 @@ A Problem Solving Flow
     - Common optimizations:
     - Pre compute info -> hashtables
 5. Walk through optimized algo
+    - Data structure brainstorm
     - Make sure to have a step by step plain english what will happen
+    - Deconstruct your solution (reverse engineer it)
 6. Implement
     - Write beautiful code
         - Modularized
@@ -105,5 +119,25 @@ A Problem Solving Flow
         - Interger division
         - Null node in binary tree
         - Start and end of interations through linked list
+8. Work through BUD again
 
-
+## Optimization Techniques
+1. BUD 
+    - Bottlenecks
+        - Part of algo that slows down overall runtime
+            - One time work that slows down
+            - Chuck of work that is down repeatedly
+    - Unnecessary Work
+        - Breaking out of loops early
+    - Duplicated Work
+        - Create hashing to for the same work
+## Solve Techniques
+1. DIY
+    - Think about if you were gonna solve the problem in real life
+2. Simplify and Generalize
+    - Simplify or tweak some constraint such as a data type
+    - Solve for that and then adapt it to the more complex version
+3. Base case and build
+    - Solve the problem for the base case then build to more special cases
+4. Data Structure Brainstorm
+    - Just list all data structures and list pros and cons
