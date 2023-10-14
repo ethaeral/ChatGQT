@@ -14,38 +14,6 @@ Insert:
 - Map the hash code to an index in the array 
     - Usually looks like:  hash(key)%array_length
 - At this index, a linked list of key and values are stored. Linked lists are used to prevent collision and lost data
-    - Hash implementations:
-        - Integer Universe Assumption
-            - Hashing by division (mod), multiplication, universal, dynamic perfect, static perfect
-            - Division is the most common
-        - Hash values should have a uniform distribution
-        - Reduce clustering -> k-independent hashing
-    - Collision Resolution:
-        - Separate Chaining (common)
-            - Collided items are chained together by
-                - Linked list
-                    - Search $O(n)$
-                    - Insert $O(1)$
-                    - Dynamic array may be more cache friendly because the reduction of scattered memory storage
-                - Self balancing binary search tree 
-                    - Search $O(log n)$
-                    - Insert $O(n log n)$
-                - Dynamic Perfect hashing
-                    - Two level hash table to reduce look up complexity to $O(1)$
-                    - Buckets of $k$ entries are organized as perfect hash tables with $k^{2}$
-                    - This is more perfomant when compared the standardlinked list under heavy load
-                    - Fusion tree for each bucket also results in constant time
-        - Open Addressing
-            - Every entry record is stored in a bucket array itself and hash resoution is performed through probing. Probing sequences include:
-                - Linear Probing
-                - Quadratic Probing
-                - Double hashing
-            - Performance of open address maybe slower when load factor approaches 1
-            - Based on open addressing
-                - Coalesced hashing
-                - Cuckoo hashing
-                - Hopscoth hashing
-                - Robin Hood hashing
 
 Retrieve:
 - Compute hash code from key
@@ -56,6 +24,41 @@ Retrieve:
 Implement a look up system using a balanced binary search tree. The advantage of this is potentially using less space, since we no longer allocate a large array.
 Worst Case O(N)
 Look Up Time O(log N)
+
+#### Collision Gaurd and Resolution
+- Hash implementations:
+    - Integer Universe Assumption
+        - Hashing by division (mod), multiplication, universal, dynamic perfect, static perfect
+        - Division is the most common
+    - Hash values should have a uniform distribution
+    - Reduce clustering -> k-independent hashing
+- Collision Resolution:
+    - Separate Chaining (common)
+        - Collided items are chained together by
+            - Linked list
+                - Search $O(n)$
+                - Insert $O(1)$
+                - Dynamic array may be more cache friendly because the reduction of scattered memory storage
+            - Self balancing binary search tree 
+                - Search $O(log n)$
+                - Insert $O(n log n)$
+            - Dynamic Perfect hashing
+                - Two level hash table to reduce look up complexity to $O(1)$
+                - Buckets of $k$ entries are organized as perfect hash tables with $k^{2}$
+                - This is more perfomant when compared the standardlinked list under heavy load
+                - Fusion tree for each bucket also results in constant time
+    - Open Addressing
+        - Every entry record is stored in a bucket array itself and hash resoution is performed through probing. Probing sequences include:
+            - Linear Probing
+            - Quadratic Probing
+            - Double hashing
+        - Performance of open address maybe slower when load factor approaches 1
+        - Based on open addressing
+            - Coalesced hashing
+            - Cuckoo hashing
+            - Hopscoth hashing
+            - Robin Hood hashing
+
 
 #### Resizing
 - Moving all entries to a newly allocated hash table 
@@ -84,7 +87,7 @@ Hash tables turn out to be on average more efficient than search trees or other 
 - Caches
 - Set
 
-### Language
+### Terms
 - Associative Array
     - Stores a set of (key,value) pairs
 - Load Factor
@@ -92,6 +95,8 @@ Hash tables turn out to be on average more efficient than search trees or other 
         - $n$ is the number of entries occupied in the hash table
         - $m$ is the number of buckets
     - Performancce of the hash deteriorates in relation to load factor. Acceptable figures of a load factor should be 0.6-0.75
+
+### Naive Approach
 
 ## ArrayList & Resizable Arrays
 Resizable array implementation is set to where when the array is full to increase the size by 50% or another value. Access takes O(1) and resizing takes O(n) worst case
